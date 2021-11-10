@@ -1,0 +1,16 @@
+com\epam\spring\homework1\Application.class
+com\epam\spring\homework1\beans\BeanA.class
+com\epam\spring\homework1\other\OtherBeanB.class
+com\epam\spring\homework1\config\BeansConfig.class
+com\epam\spring\homework1\other\OtherBeanA.class
+com\epam\spring\homework1\other\OtherBeanC.class
+com\epam\spring\homework1\beans\BeanB.class
+com\epam\spring\homework1\beans\BeanC.class
+com\epam\spring\homework1\config\PetConfig.class
+com\epam\spring\homework1\config\OtherConfig.class
+com\epam\spring\homework1\pet\Animal.class
+com\epam\spring\homework1\pet\Dog.class
+com\epam\spring\homework1\pet\Cat.class
+com\epam\spring\homework1\pet\Spider.class
+com\epam\spring\homework1\Pet.class
+com\epam\spring\homework1\pet\Cheetah.class
