@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Order(2)
 public class Cat implements Animal{
+
     @Override
     public String toString() {
         return "Cat";
