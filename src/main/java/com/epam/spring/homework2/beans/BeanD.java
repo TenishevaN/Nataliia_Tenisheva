@@ -33,14 +33,6 @@ public class BeanD implements Validator{
         System.out.println(" custom destroy method for BeanD");
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
     @Override
     public String toString() {
         return "BeanD{" +
