@@ -12,8 +12,7 @@ public class BeanFactoryPostProcessorCustom implements BeanFactoryPostProcessor 
         for (String beanName : configurableListableBeanFactory.getBeanDefinitionNames()) {
             if ("beanB".equals(beanName)) {
                 BeanDefinition beanDefinition = configurableListableBeanFactory.getBeanDefinition("beanB");
-                beanDefinition.setInitMethodName("customInitMethodC");
-                System.out.println("init method for beanB has changed: " + beanDefinition.getInitMethodName());
+                beanDefinition.setInitMethodName("changedCustomInitMethodB");
             }
         }
     }

@@ -29,6 +29,12 @@ public class BeanB implements Validator{
         System.out.println(" custom init method for BeanB "  + this);
     }
 
+    private void changedCustomInitMethodB() {
+        System.out.println(" changed custom init method for BeanB "  + this);
+    }
+
+
+
     private void customDestroyMethodB(){
         System.out.println(" custom destroy method for BeanB");
     }
