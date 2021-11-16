@@ -16,30 +16,30 @@ public class RepairRequestController {
     private final RepairRequestService repairRequestService;
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value = "/repairRequest")
+    @PostMapping(value = "/repair-request")
     public RepairRequestDto addRepairRequest(@RequestBody RepairRequestDto repairRequestDto) {
         return repairRequestService.add(repairRequestDto);
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping(value = "/repairRequest/{id}")
+    @PutMapping(value = "/repair-request/{id}")
     public RepairRequestDto updateRepairRequest(@PathVariable int id, @RequestBody RepairRequestDto repairRequestDto) {
         return repairRequestService.update(id, repairRequestDto);
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/repairRequest")
+    @GetMapping(value = "/repair-request")
     public List<RepairRequestDto> getAllRepairRequests() {
         return repairRequestService.getAll();
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/repairRequest/{id}")
+    @GetMapping(value = "/repair-request/{id}")
     public RepairRequestDto getRepairRequest(@PathVariable int id) {
         return repairRequestService.get(id);
     }
 
-    @DeleteMapping(value = "/repairRequest/{id}")
+    @DeleteMapping(value = "/repair-request/{id}")
     public ResponseEntity<Void> deleteRepairRequest(@PathVariable int id) {
         repairRequestService.delete(id);
         return ResponseEntity.noContent().build();

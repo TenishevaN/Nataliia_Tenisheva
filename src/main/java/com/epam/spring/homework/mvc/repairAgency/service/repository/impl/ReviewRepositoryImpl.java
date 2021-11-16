@@ -19,12 +19,12 @@ public class ReviewRepositoryImpl implements ReviewRepository, GenerationId {
     @Override
     public Review add(Review review) {
 
-        List<Integer> idList = list
-                .stream()
-                .map(x -> x.getId()).collect(Collectors.toList());
-        int id = generateId(idList);
-        log.info("id for new  review {}", id);
-        if (review.getId() == 0) {
+         if (review.getId() == 0) {
+             List<Integer> idList = list
+                     .stream()
+                     .map(x -> x.getId()).collect(Collectors.toList());
+             int id = generateId(idList);
+             log.info("id for new  review {}", id);
             review.setId(id);
         }
         review.setDate(Instant.now());

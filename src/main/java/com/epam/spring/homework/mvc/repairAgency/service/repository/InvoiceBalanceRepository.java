@@ -18,4 +18,6 @@ public interface InvoiceBalanceRepository {
     BigDecimal getTotal(int id);
 
     BigDecimal getBalanceOwed(int id);
+
+    InvoiceBalance updateAmmount(int id, BigDecimal ammount);
 }

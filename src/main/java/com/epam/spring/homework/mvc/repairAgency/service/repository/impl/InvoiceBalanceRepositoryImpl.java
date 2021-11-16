@@ -33,12 +33,12 @@ public class InvoiceBalanceRepositoryImpl implements InvoiceBalanceRepository, G
     @Override
     public InvoiceBalance add(final InvoiceBalance invoiceBalance) {
 
-        List<Integer> idList = list
-                .stream()
-                .map(x -> x.getId()).collect(Collectors.toList());
-        int id = generateId(idList);
-        log.info("id for new  invoiceBalance {}", id);
         if (invoiceBalance.getId() == 0) {
+            List<Integer> idList = list
+                    .stream()
+                    .map(x -> x.getId()).collect(Collectors.toList());
+            int id = generateId(idList);
+            log.info("id for new  invoiceBalance {}", id);
             invoiceBalance.setId(id);
         }
         list.add(invoiceBalance);
@@ -50,7 +50,6 @@ public class InvoiceBalanceRepositoryImpl implements InvoiceBalanceRepository, G
 
         boolean isDeleted = list.removeIf(item -> item.getId() == id);
         if (isDeleted) {
-            invoiceBalance.setId(id);
             list.add(invoiceBalance);
         } else {
             throw new RuntimeException("invoiceBalance is not found!");
@@ -72,5 +71,11 @@ public class InvoiceBalanceRepositoryImpl implements InvoiceBalanceRepository, G
         return null;
     }
 
+    @Override
+    public InvoiceBalance updateAmmount(int id, BigDecimal ammount) {
 
+        InvoiceBalance invoiceBalance = get(id);
+        invoiceBalance.setAmmount(ammount);
+        return invoiceBalance;
+    }
 }

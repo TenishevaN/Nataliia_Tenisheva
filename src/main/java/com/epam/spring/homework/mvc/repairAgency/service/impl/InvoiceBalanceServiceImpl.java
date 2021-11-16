@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,6 +51,13 @@ public class InvoiceBalanceServiceImpl implements InvoiceBalanceService {
 
         InvoiceBalance invoiceBalance = mapInvoiceBalanceDtoToInvoiceBalance(invoiceBalanceDto);
         invoiceBalance = invoiceBalanceRepository.update(id, invoiceBalance);
+        return mapInvoiceBalanceToInvoiceBalanceDto(invoiceBalance);
+    }
+
+    @Override
+    public InvoiceBalanceDto updateAmmount(int id, BigDecimal ammount) {
+
+        InvoiceBalance invoiceBalance = invoiceBalanceRepository.updateAmmount(id, ammount);
         return mapInvoiceBalanceToInvoiceBalanceDto(invoiceBalance);
     }
 

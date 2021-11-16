@@ -18,6 +18,7 @@ public class UserRepositoryImpl implements UserRepository, GenerationId {
 
     @Override
     public User get(String login) {
+
         return list.stream()
                 .filter(user -> user.getLogin().equals(login))
                 .findFirst()
@@ -32,12 +33,12 @@ public class UserRepositoryImpl implements UserRepository, GenerationId {
     @Override
     public User add(final User user) {
 
-        List<Integer> idList = list
-                .stream()
-                .map(x -> x.getId()).collect(Collectors.toList());
-        int id = generateId(idList);
-        log.info("id for new  user {}", id);
         if (user.getId() == 0) {
+            List<Integer> idList = list
+                    .stream()
+                    .map(x -> x.getId()).collect(Collectors.toList());
+            int id = generateId(idList);
+            log.info("id for new  user {}", id);
             user.setId(id);
         }
         list.add(user);
@@ -46,6 +47,7 @@ public class UserRepositoryImpl implements UserRepository, GenerationId {
 
     @Override
     public User update(final String login, final User user) {
+
         boolean isDeleted = list.removeIf(u -> u.getLogin().equals(login));
         if (isDeleted) {
             list.add(user);
@@ -57,6 +59,7 @@ public class UserRepositoryImpl implements UserRepository, GenerationId {
 
     @Override
     public void delete(final String login) {
+
         list.removeIf(user -> user.getLogin().equals(login));
     }
 }

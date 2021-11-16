@@ -32,12 +32,12 @@ public class RepairRequestRepositoryImpl implements RepairRequestRepository, Gen
     @Override
     public RepairRequest add(final RepairRequest repairRequest) {
 
-        List<Integer> idList = list
-                .stream()
-                .map(x -> x.getId()).collect(Collectors.toList());
-        int id = generateId(idList);
-        log.info("id for new  RepairRequest {}",id);
         if(repairRequest.getId() == 0){
+            List<Integer> idList = list
+                    .stream()
+                    .map(x -> x.getId()).collect(Collectors.toList());
+            int id = generateId(idList);
+            log.info("id for new  RepairRequest {}",id);
             repairRequest.setId(id);
         }
         repairRequest.setDate(Instant.now());
@@ -49,7 +49,6 @@ public class RepairRequestRepositoryImpl implements RepairRequestRepository, Gen
     public RepairRequest update(final int id, final RepairRequest repairRequest) {
         boolean isDeleted = list.removeIf(item -> item.getId() == id);
         if (isDeleted) {
-            repairRequest.setId(id);
             list.add(repairRequest);
         } else {
             throw new RuntimeException("RepairRequest is not found!");
