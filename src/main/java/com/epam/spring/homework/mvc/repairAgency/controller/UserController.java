@@ -39,10 +39,9 @@ public class UserController {
         return userService.updateUser(login, userDto);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(value = "/user/{login}")
-    public ResponseEntity<Void> deleteUser(@PathVariable String login) {
+    public void deleteUser(@PathVariable String login) {
         userService.deleteUser(login);
-        return ResponseEntity.noContent().build();
     }
-
 }
