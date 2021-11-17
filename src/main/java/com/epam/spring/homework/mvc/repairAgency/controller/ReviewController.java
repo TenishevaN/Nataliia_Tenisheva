@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,7 +17,7 @@ public class ReviewController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/review")
-    public ReviewDto createReview(@RequestBody ReviewDto reviewDto) {
+    public ReviewDto createReview(@Valid @RequestBody ReviewDto reviewDto) {
         return reviewService.add(reviewDto);
     }
 

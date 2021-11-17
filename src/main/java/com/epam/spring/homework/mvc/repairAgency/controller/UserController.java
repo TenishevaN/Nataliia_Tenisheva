@@ -4,9 +4,9 @@ import com.epam.spring.homework.mvc.repairAgency.controller.dto.UserDto;
 import com.epam.spring.homework.mvc.repairAgency.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -29,13 +29,13 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/user")
-    public UserDto createUser(@RequestBody UserDto userDto) {
+    public UserDto createUser(@Valid @RequestBody UserDto userDto) {
         return userService.createUser(userDto);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/user/{login}")
-    public UserDto updateUser(@PathVariable String login, @RequestBody UserDto userDto) {
+    public UserDto updateUser(@PathVariable String login, @Valid @RequestBody UserDto userDto) {
         return userService.updateUser(login, userDto);
     }
 

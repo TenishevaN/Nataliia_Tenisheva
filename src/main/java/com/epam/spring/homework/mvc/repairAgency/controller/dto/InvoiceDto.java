@@ -3,6 +3,8 @@ package com.epam.spring.homework.mvc.repairAgency.controller.dto;
 import lombok.Builder;
 import lombok.Data;
 
+import javax.validation.constraints.*;
+
 import java.math.BigDecimal;
 
 @Data
@@ -10,5 +12,8 @@ import java.math.BigDecimal;
 public class InvoiceDto {
 
   private int account_id;
-  private BigDecimal ammount;
+
+  @Digits(integer = 10, fraction = 2)
+  @NotNull
+   private BigDecimal ammount;
 }

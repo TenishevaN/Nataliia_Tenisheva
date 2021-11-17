@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,13 +19,13 @@ public class InvoiceController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/invoice")
-    public InvoiceDto addInvoice(@RequestBody InvoiceDto invoiceDto) {
+    public InvoiceDto addInvoice(@Valid @RequestBody InvoiceDto invoiceDto) {
         return invoiceService.add(invoiceDto);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/invoice/{id}")
-    public InvoiceDto updateInvoice(@PathVariable int id, @RequestBody InvoiceDto invoiceDto) {
+    public InvoiceDto updateInvoice(@PathVariable int id, @Valid @RequestBody InvoiceDto invoiceDto) {
         return invoiceService.update(id, invoiceDto);
     }
 

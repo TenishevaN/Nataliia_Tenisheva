@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -19,13 +20,13 @@ public class InvoiceBalanceController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/invoice-balance")
-    public InvoiceBalanceDto addInvoiceBalance(@RequestBody InvoiceBalanceDto invoiceBalanceDto) {
+    public InvoiceBalanceDto addInvoiceBalance(@Valid @RequestBody InvoiceBalanceDto invoiceBalanceDto) {
         return invoiceBalanceService.add(invoiceBalanceDto);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/invoice-balance/{id}")
-    public InvoiceBalanceDto updateInvoiceBalance(@PathVariable int id, @RequestBody InvoiceBalanceDto invoiceBalanceDto) {
+    public InvoiceBalanceDto updateInvoiceBalance(@PathVariable int id, @Valid @RequestBody InvoiceBalanceDto invoiceBalanceDto) {
         return invoiceBalanceService.update(id, invoiceBalanceDto);
     }
 
