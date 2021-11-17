@@ -22,7 +22,7 @@ public class UserRepositoryImpl implements UserRepository, GenerationId {
         return list.stream()
                 .filter(user -> user.getLogin().equals(login))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("User is not found!"));
+                .orElse(null);
     }
 
     @Override
@@ -52,14 +52,14 @@ public class UserRepositoryImpl implements UserRepository, GenerationId {
         if (isDeleted) {
             list.add(user);
         } else {
-            throw new RuntimeException("User is not found!");
+            return null;
         }
         return user;
     }
 
     @Override
-    public void delete(final String login) {
+    public boolean delete(final String login) {
 
-        list.removeIf(user -> user.getLogin().equals(login));
+        return list.removeIf(user -> user.getLogin().equals(login));
     }
 }

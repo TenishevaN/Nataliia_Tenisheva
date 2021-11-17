@@ -2,7 +2,6 @@ package com.epam.spring.homework.mvc.repairAgency.controller;
 
 
 import com.epam.spring.homework.mvc.repairAgency.controller.dto.InvoiceBalanceDto;
-import com.epam.spring.homework.mvc.repairAgency.controller.dto.RepairRequestDto;
 import com.epam.spring.homework.mvc.repairAgency.service.InvoiceBalanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,19 +20,34 @@ public class InvoiceBalanceController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/invoice-balance")
     public InvoiceBalanceDto addInvoiceBalance(@Valid @RequestBody InvoiceBalanceDto invoiceBalanceDto) {
-        return invoiceBalanceService.add(invoiceBalanceDto);
+
+        InvoiceBalanceDto invoiceBalance = invoiceBalanceService.add(invoiceBalanceDto);
+        if (invoiceBalance == null) {
+            throw new NullPointerException();
+        }
+        return invoiceBalance;
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/invoice-balance/{id}")
     public InvoiceBalanceDto updateInvoiceBalance(@PathVariable int id, @Valid @RequestBody InvoiceBalanceDto invoiceBalanceDto) {
-        return invoiceBalanceService.update(id, invoiceBalanceDto);
+
+        InvoiceBalanceDto invoiceBalance = invoiceBalanceService.update(id, invoiceBalanceDto);
+        if (invoiceBalance == null) {
+            throw new NullPointerException();
+        }
+        return invoiceBalance;
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PatchMapping(value = "/invoice-balance/{id}/{ammount}")
     public InvoiceBalanceDto updateInvoiceBalanceAmmount(@PathVariable int id, @PathVariable BigDecimal ammount) {
-        return invoiceBalanceService.updateAmmount(id, ammount);
+
+        InvoiceBalanceDto invoiceBalance = invoiceBalanceService.updateAmmount(id, ammount);
+        if (invoiceBalance == null) {
+            throw new NullPointerException();
+        }
+        return invoiceBalance;
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -45,7 +59,11 @@ public class InvoiceBalanceController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/invoice-balance/{id}")
     public InvoiceBalanceDto getInvoiceBalance(@PathVariable int id) {
-        return invoiceBalanceService.get(id);
-    }
 
+        InvoiceBalanceDto invoiceBalance = invoiceBalanceService.get(id);
+        if (invoiceBalance == null) {
+            throw new NullPointerException();
+        }
+        return invoiceBalance;
+    }
 }

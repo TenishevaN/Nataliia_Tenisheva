@@ -15,6 +15,6 @@ public interface InvoiceRepository {
 
     Invoice update(int id, Invoice invoice);
 
-    void delete(int id);
+    boolean delete(int id);
 
 }

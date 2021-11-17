@@ -22,7 +22,7 @@ public class InvoiceBalanceRepositoryImpl implements InvoiceBalanceRepository, G
         return list.stream()
                 .filter(item -> item.getId() == id)
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("InvoiceBalance is not found!"));
+                .orElse(null);
     }
 
     @Override

@@ -22,7 +22,12 @@ public class StatusController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/status/{locale}/{id}")
     public StatusDto getStatus(@PathVariable int id, @PathVariable String locale) {
-        return statusService.get(id, locale);
+
+        StatusDto status = statusService.get(id, locale);
+        if (status == null) {
+            throw new NullPointerException();
+        }
+        return status;
     }
 
     @ResponseStatus(HttpStatus.OK)

@@ -18,7 +18,12 @@ public class ReviewController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/review")
     public ReviewDto createReview(@Valid @RequestBody ReviewDto reviewDto) {
-        return reviewService.add(reviewDto);
+
+        ReviewDto review = reviewService.add(reviewDto);
+        if (review == null) {
+            throw new NullPointerException();
+        }
+        return review;
     }
 
     @ResponseStatus(HttpStatus.OK)

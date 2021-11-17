@@ -49,8 +49,8 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public void delete(final int id) {
-        invoiceRepository.delete(id);
+    public boolean delete(final int id) {
+        return invoiceRepository.delete(id);
     }
 
     private InvoiceDto mapInvoiceToInvoiceDto(final Invoice invoice) {

@@ -48,8 +48,9 @@ public class RepairRequestServiceImpl implements RepairRequestService {
     }
 
     @Override
-    public void delete(int id) {
+    public boolean delete(int id) {
         repairRequestRepository.delete(id);
+        return false;
     }
 
     private RepairRequestDto mapRepairRequestToRepairRequestDto(final RepairRequest repairRequest) {

@@ -14,6 +14,6 @@ public interface InvoiceService {
 
     InvoiceDto update(int id, InvoiceDto invoiceDto);
 
-    void delete(int id);
+    boolean delete(int id);
 
 }

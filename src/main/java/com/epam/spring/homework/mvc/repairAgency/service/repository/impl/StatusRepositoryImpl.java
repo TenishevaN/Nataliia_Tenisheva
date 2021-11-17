@@ -17,7 +17,7 @@ public class StatusRepositoryImpl implements StatusRepository {
         return list.stream()
                 .filter(status -> (status.getId() == idStatus && status.getLocale().equals(locale)))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Status is not found!"));
+                .orElse(null);
     }
 
     @Override

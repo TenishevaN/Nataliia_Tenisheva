@@ -14,5 +14,5 @@ public interface RepairRequestService {
 
     RepairRequestDto update(int id, RepairRequestDto repairRequestDto);
 
-    void delete(int id);
+    boolean delete(int id);
 }

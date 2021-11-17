@@ -21,7 +21,7 @@ public class InvoiceRepositoryImpl implements InvoiceRepository, GenerationId {
         return list.stream()
                 .filter(item -> item.getId() == id)
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Invoice is not found!"));
+                .orElse(null);
     }
 
     @Override
@@ -32,15 +32,15 @@ public class InvoiceRepositoryImpl implements InvoiceRepository, GenerationId {
     @Override
     public Invoice add(final Invoice invoice) {
 
-         if(invoice.getId() == 0){
+        if (invoice.getId() == 0) {
             List<Integer> idList = list
                     .stream()
                     .map(x -> x.getId()).collect(Collectors.toList());
             int id = generateId(idList);
-            log.info("id for new  invoice {}",id);
+            log.info("id for new  invoice {}", id);
             invoice.setId(id);
         }
-         list.add(invoice);
+        list.add(invoice);
         return invoice;
     }
 
@@ -57,7 +57,7 @@ public class InvoiceRepositoryImpl implements InvoiceRepository, GenerationId {
     }
 
     @Override
-    public void delete(final int id) {
-        list.removeIf(item -> item.getId() == id);
+    public boolean delete(final int id) {
+        return list.removeIf(item -> item.getId() == id);
     }
 }

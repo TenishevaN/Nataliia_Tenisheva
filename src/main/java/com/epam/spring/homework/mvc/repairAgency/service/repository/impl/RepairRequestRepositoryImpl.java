@@ -21,7 +21,7 @@ public class RepairRequestRepositoryImpl implements RepairRequestRepository, Gen
         return list.stream()
                 .filter(item -> item.getId() == id)
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("RepairRequest is not found!"));
+                .orElse(null);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class RepairRequestRepositoryImpl implements RepairRequestRepository, Gen
     }
 
     @Override
-    public void delete(int id) {
-        list.removeIf(item -> item.getId() == id);
+    public boolean delete(int id) {
+      return  list.removeIf(item -> item.getId() == id);
     }
 }

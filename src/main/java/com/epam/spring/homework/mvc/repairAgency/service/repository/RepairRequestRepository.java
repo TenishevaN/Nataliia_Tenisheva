@@ -14,5 +14,5 @@ public interface RepairRequestRepository {
 
     RepairRequest update(int id, RepairRequest repairRequest);
 
-    void delete(int id);
+    boolean delete(int id);
 }

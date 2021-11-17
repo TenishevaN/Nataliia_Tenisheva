@@ -35,7 +35,7 @@ public class AccountLocalizationRepositoryImpl implements AccountLocalizationRep
         return (List<AccountLocalization>) list.stream()
                 .filter(item -> item.getId() == id)
                 .findAny()
-                .orElseThrow(() -> new RuntimeException("accountLocalization is not found!"));
+                .orElse(null);
     }
 
     @Override

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -19,13 +20,23 @@ public class RepairRequestController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/repair-request")
     public RepairRequestDto addRepairRequest(@Valid @RequestBody RepairRequestDto repairRequestDto) {
-        return repairRequestService.add(repairRequestDto);
+
+        RepairRequestDto repairRequest = repairRequestService.add(repairRequestDto);
+        if (repairRequest == null) {
+            throw new NullPointerException();
+        }
+        return repairRequest;
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/repair-request/{id}")
     public RepairRequestDto updateRepairRequest(@PathVariable int id, @Valid @RequestBody RepairRequestDto repairRequestDto) {
-        return repairRequestService.update(id, repairRequestDto);
+
+        RepairRequestDto repairRequest = repairRequestService.update(id, repairRequestDto);
+        if (repairRequest == null) {
+            throw new NullPointerException();
+        }
+        return repairRequest;
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -37,12 +48,21 @@ public class RepairRequestController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/repair-request/{id}")
     public RepairRequestDto getRepairRequest(@PathVariable int id) {
-        return repairRequestService.get(id);
+
+        RepairRequestDto repairRequest = repairRequestService.get(id);
+        if (repairRequest == null) {
+            throw new NullPointerException();
+        }
+        return repairRequest;
     }
 
     @DeleteMapping(value = "/repair-request/{id}")
     public ResponseEntity<Void> deleteRepairRequest(@PathVariable int id) {
-        repairRequestService.delete(id);
+
+        boolean repairRequestDeleted = repairRequestService.delete(id);
+        if (!repairRequestDeleted) {
+            throw new EntityNotFoundException();
+        }
         return ResponseEntity.noContent().build();
     }
 }

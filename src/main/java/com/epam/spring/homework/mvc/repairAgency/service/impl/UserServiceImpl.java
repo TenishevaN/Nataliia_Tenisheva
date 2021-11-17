@@ -51,9 +51,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(final String login) {
+    public boolean deleteUser(final String login) {
         log.info("deleteUser by login {}", login);
-        userRepository.delete(login);
+        return userRepository.delete(login);
     }
 
     private UserDto mapUserToUserDto(final User user) {
