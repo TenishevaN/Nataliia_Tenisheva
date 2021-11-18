@@ -1,7 +1,7 @@
-package com.epam.spring.homework.mvc.repairAgency.service.repository.impl;
+package com.epam.spring.homework.mvc.repairAgency.repository.impl;
 
-import com.epam.spring.homework.mvc.repairAgency.service.model.Status;
-import com.epam.spring.homework.mvc.repairAgency.service.repository.StatusRepository;
+import com.epam.spring.homework.mvc.repairAgency.model.Status;
+import com.epam.spring.homework.mvc.repairAgency.repository.StatusRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

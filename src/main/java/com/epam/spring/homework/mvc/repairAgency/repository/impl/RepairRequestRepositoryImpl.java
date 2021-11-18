@@ -1,7 +1,7 @@
-package com.epam.spring.homework.mvc.repairAgency.service.repository.impl;
+package com.epam.spring.homework.mvc.repairAgency.repository.impl;
 
-import com.epam.spring.homework.mvc.repairAgency.service.model.RepairRequest;
-import com.epam.spring.homework.mvc.repairAgency.service.repository.RepairRequestRepository;
+import com.epam.spring.homework.mvc.repairAgency.model.RepairRequest;
+import com.epam.spring.homework.mvc.repairAgency.repository.RepairRequestRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

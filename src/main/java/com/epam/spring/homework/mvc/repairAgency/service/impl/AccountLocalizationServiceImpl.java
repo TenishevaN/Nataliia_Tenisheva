@@ -2,8 +2,8 @@ package com.epam.spring.homework.mvc.repairAgency.service.impl;
 
 import com.epam.spring.homework.mvc.repairAgency.controller.dto.AccountLocalizationDto;
 import com.epam.spring.homework.mvc.repairAgency.service.AccountLocalizationService;
-import com.epam.spring.homework.mvc.repairAgency.service.model.AccountLocalization;
-import com.epam.spring.homework.mvc.repairAgency.service.repository.AccountLocalizationRepository;
+import com.epam.spring.homework.mvc.repairAgency.model.AccountLocalization;
+import com.epam.spring.homework.mvc.repairAgency.repository.AccountLocalizationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

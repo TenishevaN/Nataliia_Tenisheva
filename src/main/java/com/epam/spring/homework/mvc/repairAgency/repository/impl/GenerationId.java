@@ -1,4 +1,4 @@
-package com.epam.spring.homework.mvc.repairAgency.service.repository.impl;
+package com.epam.spring.homework.mvc.repairAgency.repository.impl;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
-package com.epam.spring.homework.mvc.repairAgency.service.repository.impl;
+package com.epam.spring.homework.mvc.repairAgency.repository.impl;
 
-import com.epam.spring.homework.mvc.repairAgency.service.model.AccountLocalization;
-import com.epam.spring.homework.mvc.repairAgency.service.repository.AccountLocalizationRepository;
+import com.epam.spring.homework.mvc.repairAgency.model.AccountLocalization;
+import com.epam.spring.homework.mvc.repairAgency.repository.AccountLocalizationRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

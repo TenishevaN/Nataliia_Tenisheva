@@ -2,8 +2,8 @@ package com.epam.spring.homework.mvc.repairAgency.service.impl;
 
 import com.epam.spring.homework.mvc.repairAgency.controller.dto.InvoiceBalanceDto;
 import com.epam.spring.homework.mvc.repairAgency.service.InvoiceBalanceService;
-import com.epam.spring.homework.mvc.repairAgency.service.model.InvoiceBalance;
-import com.epam.spring.homework.mvc.repairAgency.service.repository.InvoiceBalanceRepository;
+import com.epam.spring.homework.mvc.repairAgency.model.InvoiceBalance;
+import com.epam.spring.homework.mvc.repairAgency.repository.InvoiceBalanceRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

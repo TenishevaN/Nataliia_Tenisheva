@@ -2,8 +2,8 @@ package com.epam.spring.homework.mvc.repairAgency.service.impl;
 
 import com.epam.spring.homework.mvc.repairAgency.controller.dto.RepairRequestDto;
 import com.epam.spring.homework.mvc.repairAgency.service.RepairRequestService;
-import com.epam.spring.homework.mvc.repairAgency.service.model.RepairRequest;
-import com.epam.spring.homework.mvc.repairAgency.service.repository.RepairRequestRepository;
+import com.epam.spring.homework.mvc.repairAgency.model.RepairRequest;
+import com.epam.spring.homework.mvc.repairAgency.repository.RepairRequestRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

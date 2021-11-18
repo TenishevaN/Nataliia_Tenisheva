@@ -1,6 +1,6 @@
-package com.epam.spring.homework.mvc.repairAgency.service.repository;
+package com.epam.spring.homework.mvc.repairAgency.repository;
 
-import com.epam.spring.homework.mvc.repairAgency.service.model.RepairRequest;
+import com.epam.spring.homework.mvc.repairAgency.model.RepairRequest;
 
 import java.util.List;
 

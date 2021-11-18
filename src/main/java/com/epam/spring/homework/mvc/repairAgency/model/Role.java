@@ -1,4 +1,4 @@
-package com.epam.spring.homework.mvc.repairAgency.service.model;
+package com.epam.spring.homework.mvc.repairAgency.model;
 
 
 public enum Role {

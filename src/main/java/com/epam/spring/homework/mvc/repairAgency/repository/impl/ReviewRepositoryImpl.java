@@ -1,7 +1,7 @@
-package com.epam.spring.homework.mvc.repairAgency.service.repository.impl;
+package com.epam.spring.homework.mvc.repairAgency.repository.impl;
 
-import com.epam.spring.homework.mvc.repairAgency.service.model.Review;
-import com.epam.spring.homework.mvc.repairAgency.service.repository.ReviewRepository;
+import com.epam.spring.homework.mvc.repairAgency.model.Review;
+import com.epam.spring.homework.mvc.repairAgency.repository.ReviewRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import java.time.Instant;

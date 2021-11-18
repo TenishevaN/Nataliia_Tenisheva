@@ -3,8 +3,8 @@ package com.epam.spring.homework.mvc.repairAgency.service.impl;
 
 import com.epam.spring.homework.mvc.repairAgency.controller.dto.StatusDto;
 import com.epam.spring.homework.mvc.repairAgency.service.StatusService;
-import com.epam.spring.homework.mvc.repairAgency.service.model.Status;
-import com.epam.spring.homework.mvc.repairAgency.service.repository.StatusRepository;
+import com.epam.spring.homework.mvc.repairAgency.model.Status;
+import com.epam.spring.homework.mvc.repairAgency.repository.StatusRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
