@@ -1,18 +1,26 @@
 package com.epam.spring.homework.mvc.repairAgency.repository;
 
 import com.epam.spring.homework.mvc.repairAgency.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface UserRepository {
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
 
-  User get(String login);
 
-  List<User> getAll();
+  User  findByLogin(String login);
 
-  User add(User user);
+  List<User> findAll();
 
-  User update(String login, User user);
+  User save(User user);
 
-  boolean delete(String login);
+  @Modifying
+  @Query("update User u set u.name = ?1 where u.login = ?2")
+  User update(String name, String login);
+
+  void delete(User user);
 }

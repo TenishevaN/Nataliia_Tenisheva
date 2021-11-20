@@ -1,4 +1,4 @@
-package com.epam.spring.homework.mvc.repairAgency.controller;
+package com.epam.spring.homework.mvc.repairAgency.controller.errorHandler.exception;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

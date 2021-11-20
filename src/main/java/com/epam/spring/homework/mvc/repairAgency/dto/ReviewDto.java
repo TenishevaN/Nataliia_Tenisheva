@@ -1,4 +1,4 @@
-package com.epam.spring.homework.mvc.repairAgency.controller.dto;
+package com.epam.spring.homework.mvc.repairAgency.dto;
 
 import lombok.Builder;
 import lombok.Data;

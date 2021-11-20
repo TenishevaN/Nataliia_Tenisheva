@@ -1,6 +1,6 @@
 package com.epam.spring.homework.mvc.repairAgency.controller;
 
-import com.epam.spring.homework.mvc.repairAgency.controller.dto.UserDto;
+import com.epam.spring.homework.mvc.repairAgency.dto.UserDto;
 import com.epam.spring.homework.mvc.repairAgency.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -61,8 +61,9 @@ public class UserController {
     @DeleteMapping(value = "/user/{login}")
     public void deleteUser(@PathVariable String login) {
 
-        boolean userDeleted = userService.deleteUser(login);
-        if (!userDeleted) {
+        try {
+            userService.deleteUser(login);
+        } catch (EntityNotFoundException ex) {
             throw new EntityNotFoundException();
         }
     }

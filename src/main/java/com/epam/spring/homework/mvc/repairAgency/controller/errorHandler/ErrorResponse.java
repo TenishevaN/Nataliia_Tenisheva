@@ -1,4 +1,4 @@
-package com.epam.spring.homework.mvc.repairAgency.controller;
+package com.epam.spring.homework.mvc.repairAgency.controller.errorHandler;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;

@@ -1,8 +1,8 @@
 package com.epam.spring.homework.mvc.repairAgency.service.impl;
 
-import com.epam.spring.homework.mvc.repairAgency.controller.dto.UserDto;
+import com.epam.spring.homework.mvc.repairAgency.dto.UserDto;
 import com.epam.spring.homework.mvc.repairAgency.service.UserService;
-import com.epam.spring.homework.mvc.repairAgency.service.mapper.UserMapper;
+import com.epam.spring.homework.mvc.repairAgency.mapper.UserMapper;
 import com.epam.spring.homework.mvc.repairAgency.model.User;
 import com.epam.spring.homework.mvc.repairAgency.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,14 +23,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUser(String login) {
         log.info("getUser by login {}", login);
-        User user = userRepository.get(login);
+        User user = userRepository.findByLogin(login);
         return userMapper.mapUserDto(user);
     }
 
     @Override
     public List<UserDto> listUsers() {
         log.info("get all users");
-        return userRepository.getAll()
+        return userRepository.findAll()
                 .stream()
                 .map(userMapper ::mapUserDto)
                 .collect(Collectors.toList());
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     public UserDto createUser(final UserDto userDto) {
         log.info("createUser with email {}", userDto.getEmail());
         User user = userMapper.mapUser(userDto);
-        user = userRepository.add(user);
+        user = userRepository.save(user);
         return userMapper.mapUserDto(user);
     }
 
@@ -48,13 +48,15 @@ public class UserServiceImpl implements UserService {
     public UserDto updateUser(final String login, final UserDto userDto) {
         log.info("updateUser with login {}", login);
         User user = userMapper.mapUser(userDto);
-        user = userRepository.update(login, user);
+        user = userRepository.update(user.getName(), login);
         return userMapper.mapUserDto(user);
     }
 
     @Override
-    public boolean deleteUser(final String login) {
+    public void deleteUser(final String login) {
         log.info("deleteUser by login {}", login);
-        return userRepository.delete(login);
+        UserDto userDto = getUser(login);
+        User user = userMapper.mapUser(userDto);
+        userRepository.delete(user);
     }
 }

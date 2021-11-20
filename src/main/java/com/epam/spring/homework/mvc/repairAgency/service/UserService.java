@@ -1,6 +1,6 @@
 package com.epam.spring.homework.mvc.repairAgency.service;
 
-import com.epam.spring.homework.mvc.repairAgency.controller.dto.UserDto;
+import com.epam.spring.homework.mvc.repairAgency.dto.UserDto;
 
 import java.util.List;
 
@@ -14,6 +14,6 @@ public interface UserService {
 
   UserDto updateUser(String login, UserDto userDto);
 
-  boolean deleteUser(String login);
+ void deleteUser(String login);
 
 }

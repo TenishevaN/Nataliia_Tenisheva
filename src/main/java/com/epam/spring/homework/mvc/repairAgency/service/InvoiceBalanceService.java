@@ -1,6 +1,6 @@
 package com.epam.spring.homework.mvc.repairAgency.service;
 
-import com.epam.spring.homework.mvc.repairAgency.controller.dto.InvoiceBalanceDto;
+import com.epam.spring.homework.mvc.repairAgency.dto.InvoiceBalanceDto;
 
 import java.math.BigDecimal;
 import java.util.List;

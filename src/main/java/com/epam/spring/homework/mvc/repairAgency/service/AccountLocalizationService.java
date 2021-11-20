@@ -1,6 +1,6 @@
 package com.epam.spring.homework.mvc.repairAgency.service;
 
-import com.epam.spring.homework.mvc.repairAgency.controller.dto.AccountLocalizationDto;
+import com.epam.spring.homework.mvc.repairAgency.dto.AccountLocalizationDto;
 
 import java.util.List;
 

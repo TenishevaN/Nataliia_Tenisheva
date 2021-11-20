@@ -1,6 +1,6 @@
 package com.epam.spring.homework.mvc.repairAgency.service.impl;
 
-import com.epam.spring.homework.mvc.repairAgency.controller.dto.InvoiceBalanceDto;
+import com.epam.spring.homework.mvc.repairAgency.dto.InvoiceBalanceDto;
 import com.epam.spring.homework.mvc.repairAgency.service.InvoiceBalanceService;
 import com.epam.spring.homework.mvc.repairAgency.model.InvoiceBalance;
 import com.epam.spring.homework.mvc.repairAgency.repository.InvoiceBalanceRepository;

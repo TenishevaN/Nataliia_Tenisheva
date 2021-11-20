@@ -1,6 +1,6 @@
 package com.epam.spring.homework.mvc.repairAgency.service.impl;
 
-import com.epam.spring.homework.mvc.repairAgency.controller.dto.AccountLocalizationDto;
+import com.epam.spring.homework.mvc.repairAgency.dto.AccountLocalizationDto;
 import com.epam.spring.homework.mvc.repairAgency.service.AccountLocalizationService;
 import com.epam.spring.homework.mvc.repairAgency.model.AccountLocalization;
 import com.epam.spring.homework.mvc.repairAgency.repository.AccountLocalizationRepository;

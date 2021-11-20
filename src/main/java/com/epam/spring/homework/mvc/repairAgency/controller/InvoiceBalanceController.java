@@ -1,7 +1,7 @@
 package com.epam.spring.homework.mvc.repairAgency.controller;
 
 
-import com.epam.spring.homework.mvc.repairAgency.controller.dto.InvoiceBalanceDto;
+import com.epam.spring.homework.mvc.repairAgency.dto.InvoiceBalanceDto;
 import com.epam.spring.homework.mvc.repairAgency.service.InvoiceBalanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,6 @@
 package com.epam.spring.homework.mvc.repairAgency.service;
 
-import com.epam.spring.homework.mvc.repairAgency.controller.dto.InvoiceDto;
+import com.epam.spring.homework.mvc.repairAgency.dto.InvoiceDto;
 
 import java.util.List;
 

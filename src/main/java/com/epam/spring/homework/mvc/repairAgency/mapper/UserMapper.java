@@ -1,6 +1,6 @@
-package com.epam.spring.homework.mvc.repairAgency.service.mapper;
+package com.epam.spring.homework.mvc.repairAgency.mapper;
 
-import com.epam.spring.homework.mvc.repairAgency.controller.dto.UserDto;
+import com.epam.spring.homework.mvc.repairAgency.dto.UserDto;
 import com.epam.spring.homework.mvc.repairAgency.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

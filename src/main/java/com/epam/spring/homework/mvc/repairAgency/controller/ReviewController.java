@@ -1,6 +1,6 @@
 package com.epam.spring.homework.mvc.repairAgency.controller;
 
-import com.epam.spring.homework.mvc.repairAgency.controller.dto.ReviewDto;
+import com.epam.spring.homework.mvc.repairAgency.dto.ReviewDto;
 import com.epam.spring.homework.mvc.repairAgency.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
