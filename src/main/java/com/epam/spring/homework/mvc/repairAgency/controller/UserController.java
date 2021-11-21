@@ -1,5 +1,6 @@
 package com.epam.spring.homework.mvc.repairAgency.controller;
 
+import com.epam.spring.homework.mvc.repairAgency.dto.InvoiceBalanceDto;
 import com.epam.spring.homework.mvc.repairAgency.dto.UserDto;
 import com.epam.spring.homework.mvc.repairAgency.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Slf4j
@@ -50,21 +52,32 @@ public class UserController {
     @PutMapping(value = "/user/{login}")
     public UserDto updateUser(@PathVariable String login, @Valid @RequestBody UserDto userDto) {
 
-        UserDto findedUser = userService.updateUser(login, userDto);
-        if (findedUser == null) {
+        UserDto updatedUser = userService.updateUser(login, userDto);
+        if (updatedUser == null) {
             throw new NullPointerException();
         }
-        return findedUser;
+        return updatedUser;
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping(value = "/user/{login}")
-    public void deleteUser(@PathVariable String login) {
+    @DeleteMapping(value = "/user/{id}")
+    public void deleteUser(@PathVariable String id) {
 
         try {
-            userService.deleteUser(login);
+            userService.deleteUser(id);
         } catch (EntityNotFoundException ex) {
             throw new EntityNotFoundException();
         }
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PatchMapping(value = "/user/{id}/{name}")
+    public UserDto updateUserName(@PathVariable Long id, @PathVariable String name) {
+
+        UserDto updatedUser = userService.updateName(name, id);
+        if (updatedUser == null) {
+            throw new NullPointerException();
+        }
+        return updatedUser;
     }
 }
