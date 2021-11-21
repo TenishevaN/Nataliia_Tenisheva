@@ -1,13 +1,17 @@
 package com.epam.spring.homework.mvc.repairAgency.model;
 
-import lombok.Builder;
 import lombok.Data;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "status_localization")
 @Data
-@Builder
 public class Status {
 
-    private int id;
-    private String locale;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
+
 }

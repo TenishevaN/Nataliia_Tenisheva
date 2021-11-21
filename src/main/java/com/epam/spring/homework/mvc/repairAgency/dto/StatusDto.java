@@ -7,5 +7,7 @@ import lombok.Data;
 @Builder
 public class StatusDto {
 
+
     private String name;
+
 }
