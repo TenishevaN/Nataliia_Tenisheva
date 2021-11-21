@@ -1,6 +1,7 @@
 package com.epam.spring.homework.mvc.repairAgency.service.impl;
 
 import com.epam.spring.homework.mvc.repairAgency.dto.InvoiceDto;
+import com.epam.spring.homework.mvc.repairAgency.mapper.InvoiceMapper;
 import com.epam.spring.homework.mvc.repairAgency.service.InvoiceService;
 import com.epam.spring.homework.mvc.repairAgency.model.Invoice;
 import com.epam.spring.homework.mvc.repairAgency.repository.InvoiceRepository;
@@ -17,54 +18,41 @@ import java.util.stream.Collectors;
 public class InvoiceServiceImpl implements InvoiceService {
 
     private final InvoiceRepository invoiceRepository;
+    private final InvoiceMapper invoiceMapper;
 
     @Override
     public InvoiceDto get(final int id) {
         Invoice invoice = invoiceRepository.get(id);
-        return mapInvoiceToInvoiceDto(invoice);
+        return invoiceMapper.mapInvoiceDto(invoice);
     }
 
     @Override
     public List<InvoiceDto> getAll() {
         return invoiceRepository.getAll()
                 .stream()
-                .map(this::mapInvoiceToInvoiceDto)
+                .map(invoiceMapper::mapInvoiceDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     public InvoiceDto add(final InvoiceDto invoiceDto) {
 
-        Invoice invoice = mapInvoiceDtoToInvoice(invoiceDto);
+        Invoice invoice = invoiceMapper.mapInvoice(invoiceDto);
         invoice = invoiceRepository.add(invoice);
-        return mapInvoiceToInvoiceDto(invoice);
+        return invoiceMapper.mapInvoiceDto(invoice);
     }
 
     @Override
     public InvoiceDto update(final int id, final InvoiceDto invoiceDto) {
 
-        Invoice invoice = mapInvoiceDtoToInvoice(invoiceDto);
+        Invoice invoice = invoiceMapper.mapInvoice(invoiceDto);
         invoice = invoiceRepository.update(id, invoice);
-        return mapInvoiceToInvoiceDto(invoice);
+        return invoiceMapper.mapInvoiceDto(invoice);
     }
 
     @Override
     public boolean delete(final int id) {
         return invoiceRepository.delete(id);
-    }
-
-    private InvoiceDto mapInvoiceToInvoiceDto(final Invoice invoice) {
-        return InvoiceDto.builder()
-                .account_id(invoice.getAccount_id())
-                .ammount(invoice.getAmmount())
-                .build();
-    }
-
-    private Invoice mapInvoiceDtoToInvoice(final InvoiceDto invoiceDto) {
-        return Invoice.builder()
-                .account_id(invoiceDto.getAccount_id())
-                .ammount(invoiceDto.getAmmount())
-                .build();
     }
 
 }
