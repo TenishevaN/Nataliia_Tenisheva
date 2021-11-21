@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface RepairRequestService {
 
-    RepairRequestDto get(int id);
+    RepairRequestDto get(Long id);
 
     List<RepairRequestDto> getAll();
 
     RepairRequestDto add(RepairRequestDto repairRequestDto);
 
-    RepairRequestDto update(int id, RepairRequestDto repairRequestDto);
+    RepairRequestDto update(Long id, RepairRequestDto repairRequestDto);
 
-    boolean delete(int id);
+    boolean delete(Long id);
 }

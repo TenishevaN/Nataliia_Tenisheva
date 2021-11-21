@@ -11,13 +11,11 @@ import java.time.Instant;
 @Builder
 public class RepairRequestDto {
 
-    @NotBlank
-    private int userId;
+    private Long id;
+    private Long userId;
     private String userName;
-    private int statusId;
-    private String statusName;
-    private int masterId;
-    private String masterName;
+    private Long statusId;
+    private Long masterId;
     private BigDecimal cost;
     private Instant date;
 

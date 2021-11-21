@@ -1,18 +1,17 @@
 package com.epam.spring.homework.mvc.repairAgency.repository;
 
 import com.epam.spring.homework.mvc.repairAgency.model.RepairRequest;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface RepairRequestRepository {
+@Repository
+public interface RepairRequestRepository extends JpaRepository<RepairRequest, Long> {
 
-    RepairRequest get(int id);
+    RepairRequest findById(int id);
 
-    List<RepairRequest> getAll();
+    List<RepairRequest> findAll();
 
-    RepairRequest add(RepairRequest repairRequest);
-
-    RepairRequest update(int id, RepairRequest repairRequest);
-
-    boolean delete(int id);
+    RepairRequest save(RepairRequest repairRequest);
 }

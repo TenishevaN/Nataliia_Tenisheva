@@ -30,7 +30,7 @@ public class RepairRequestController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/repair-request/{id}")
-    public RepairRequestDto updateRepairRequest(@PathVariable int id, @Valid @RequestBody RepairRequestDto repairRequestDto) {
+    public RepairRequestDto updateRepairRequest(@PathVariable Long id, @Valid @RequestBody RepairRequestDto repairRequestDto) {
 
         RepairRequestDto repairRequest = repairRequestService.update(id, repairRequestDto);
         if (repairRequest == null) {
@@ -47,7 +47,7 @@ public class RepairRequestController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/repair-request/{id}")
-    public RepairRequestDto getRepairRequest(@PathVariable int id) {
+    public RepairRequestDto getRepairRequest(@PathVariable Long id) {
 
         RepairRequestDto repairRequest = repairRequestService.get(id);
         if (repairRequest == null) {
@@ -57,7 +57,7 @@ public class RepairRequestController {
     }
 
     @DeleteMapping(value = "/repair-request/{id}")
-    public ResponseEntity<Void> deleteRepairRequest(@PathVariable int id) {
+    public ResponseEntity<Void> deleteRepairRequest(@PathVariable Long id) {
 
         boolean repairRequestDeleted = repairRequestService.delete(id);
         if (!repairRequestDeleted) {
