@@ -11,12 +11,16 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String login;
+
     private String name;
+
     private String email;
-    private transient String password;
+
+    private String password;
     @Column(nullable = true, name = "role_id")
     private Integer roleId;
     @Column(nullable = true, name = "invoice_id")

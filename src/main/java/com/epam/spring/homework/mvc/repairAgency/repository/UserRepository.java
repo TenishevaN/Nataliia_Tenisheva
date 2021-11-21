@@ -12,15 +12,13 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 
-  User  findByLogin(String login);
+    User findByLogin(String login);
 
-  List<User> findAll();
+    List<User> findAll();
 
-  User save(User user);
+    User save(User user);
 
-  @Modifying
-  @Query("update User u set u.name = ?1 where u.login = ?2")
-  User update(String name, String login);
-
-  void delete(User user);
+    @Modifying
+    @Query("update User u set u.name = ?1 where u.id = ?2")
+    User updateName(String name, Long id);
 }

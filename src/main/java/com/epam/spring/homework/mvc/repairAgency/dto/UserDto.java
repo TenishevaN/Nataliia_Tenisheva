@@ -3,6 +3,7 @@ package com.epam.spring.homework.mvc.repairAgency.dto;
 import lombok.Builder;
 import lombok.Data;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -22,5 +23,8 @@ public class UserDto {
     @Email
     @Pattern(regexp = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+[.]((com)|(org)|(net)|(ru))$")
     private String email;
+
+    private Integer roleId;
+    private Integer invoiceId;
 
 }
