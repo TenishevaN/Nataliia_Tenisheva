@@ -1,6 +1,7 @@
 package com.epam.spring.homework.mvc.repairAgency.service.impl;
 
 import com.epam.spring.homework.mvc.repairAgency.dto.ReviewDto;
+import com.epam.spring.homework.mvc.repairAgency.mapper.ReviewMapper;
 import com.epam.spring.homework.mvc.repairAgency.service.ReviewService;
 import com.epam.spring.homework.mvc.repairAgency.model.Review;
 import com.epam.spring.homework.mvc.repairAgency.repository.ReviewRepository;
@@ -16,42 +17,30 @@ import java.util.stream.Collectors;
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
+    private final ReviewMapper reviewMapper;
 
     @Override
     public ReviewDto add(final ReviewDto reviewDto) {
 
-        Review review = mapReviewDtoToReview(reviewDto);
-        review = reviewRepository.add(review);
-        return mapReviewToReviewDto(review);
+        Review review = reviewMapper.mapReview(reviewDto);
+        review = reviewRepository.save(review);
+        return reviewMapper.mapReviewDto(review);
     }
 
     @Override
     public List<ReviewDto> getAll() {
-        return reviewRepository.getAll()
+        return reviewRepository.findAll()
                 .stream()
-                .map(this::mapReviewToReviewDto)
+                .map(reviewMapper::mapReviewDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<ReviewDto> getAllByRequestId(final int id) {
-        return reviewRepository.getAllByRequestId(id)
+    public List<ReviewDto> getAllByRequestId(final Long id) {
+        return reviewRepository.findAllByRepairRequestId(id)
                 .stream()
-                .map(this::mapReviewToReviewDto)
+                .map(reviewMapper::mapReviewDto)
                 .collect(Collectors.toList());
     }
 
-    private ReviewDto mapReviewToReviewDto(Review review) {
-        return ReviewDto.builder()
-                .date(review.getDate())
-                .comment(review.getComment())
-                .build();
-    }
-
-    private Review mapReviewDtoToReview(ReviewDto reviewDto) {
-        return Review.builder()
-                .date(reviewDto.getDate())
-                .comment(reviewDto.getComment())
-                .build();
-    }
 }

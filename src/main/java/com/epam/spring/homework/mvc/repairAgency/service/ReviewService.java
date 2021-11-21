@@ -8,6 +8,6 @@ public interface ReviewService {
 
     ReviewDto add(ReviewDto reviewDto);
     List<ReviewDto> getAll();
-    List<ReviewDto> getAllByRequestId(int id);
+    List<ReviewDto> getAllByRequestId(Long id);
 
 }

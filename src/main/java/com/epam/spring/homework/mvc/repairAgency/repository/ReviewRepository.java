@@ -1,14 +1,17 @@
 package com.epam.spring.homework.mvc.repairAgency.repository;
 
 import com.epam.spring.homework.mvc.repairAgency.model.Review;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface ReviewRepository {
+@Repository
+public interface ReviewRepository extends JpaRepository<Review, Long> {
 
-    Review add(Review review);
+    Review save(Review review);
 
-    List<Review> getAll();
+    List<Review> findAll();
 
-    List<Review> getAllByRequestId(int id);
+    List<Review> findAllByRepairRequestId(Long id);
 }

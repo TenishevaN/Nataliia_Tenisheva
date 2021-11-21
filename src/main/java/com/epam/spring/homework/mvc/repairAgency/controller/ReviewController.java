@@ -34,7 +34,7 @@ public class ReviewController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/review/{id}")
-    public List<ReviewDto> getAllByRequestId(@PathVariable int id) {
+    public List<ReviewDto> getAllByRequestId(@PathVariable Long id) {
         return reviewService.getAllByRequestId(id);
     }
 }

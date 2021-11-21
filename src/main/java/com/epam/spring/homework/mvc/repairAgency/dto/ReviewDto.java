@@ -10,7 +10,9 @@ import java.time.Instant;
 @Builder
 public class ReviewDto {
 
+    private Long id;
     private Instant date;
+    private Long repairRequestId;
     @NotBlank
     private String comment;
 }

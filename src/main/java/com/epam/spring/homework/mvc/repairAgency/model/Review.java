@@ -1,16 +1,19 @@
 package com.epam.spring.homework.mvc.repairAgency.model;
 
-import lombok.Builder;
 import lombok.Data;
+
+import javax.persistence.*;
 import java.time.Instant;
 
+@Entity
+@Table(name = "review")
 @Data
-@Builder
 public class Review {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Instant date;
     private String comment;
-    private int id;
-    private int repair_request_id;
-
+    private Long repairRequestId;
 }
