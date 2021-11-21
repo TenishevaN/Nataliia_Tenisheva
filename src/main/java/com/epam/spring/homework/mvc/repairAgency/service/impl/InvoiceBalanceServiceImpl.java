@@ -1,6 +1,7 @@
 package com.epam.spring.homework.mvc.repairAgency.service.impl;
 
 import com.epam.spring.homework.mvc.repairAgency.dto.InvoiceBalanceDto;
+import com.epam.spring.homework.mvc.repairAgency.mapper.InvoiceBalanceMapper;
 import com.epam.spring.homework.mvc.repairAgency.service.InvoiceBalanceService;
 import com.epam.spring.homework.mvc.repairAgency.model.InvoiceBalance;
 import com.epam.spring.homework.mvc.repairAgency.repository.InvoiceBalanceRepository;
@@ -19,12 +20,13 @@ import java.util.stream.Collectors;
 public class InvoiceBalanceServiceImpl implements InvoiceBalanceService {
 
     private final InvoiceBalanceRepository invoiceBalanceRepository;
+    private final InvoiceBalanceMapper invoiceBalanceMapper;
 
     @Override
     public InvoiceBalanceDto get(final int id) {
 
         InvoiceBalance invoiceBalance = invoiceBalanceRepository.get(id);
-        return mapInvoiceBalanceToInvoiceBalanceDto(invoiceBalance);
+        return invoiceBalanceMapper.mapInvoiceDto(invoiceBalance);
     }
 
 
@@ -33,49 +35,31 @@ public class InvoiceBalanceServiceImpl implements InvoiceBalanceService {
 
         return invoiceBalanceRepository.getAll()
                 .stream()
-                .map(this::mapInvoiceBalanceToInvoiceBalanceDto)
+                .map(invoiceBalanceMapper::mapInvoiceDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     public InvoiceBalanceDto add(final InvoiceBalanceDto invoiceBalanceDto) {
 
-        InvoiceBalance invoiceBalance = mapInvoiceBalanceDtoToInvoiceBalance(invoiceBalanceDto);
+        InvoiceBalance invoiceBalance = invoiceBalanceMapper.mapInvoice(invoiceBalanceDto);
         invoiceBalance = invoiceBalanceRepository.add(invoiceBalance);
-        return mapInvoiceBalanceToInvoiceBalanceDto(invoiceBalance);
+        return invoiceBalanceMapper.mapInvoiceDto(invoiceBalance);
     }
 
 
     @Override
     public InvoiceBalanceDto update(final int id, final InvoiceBalanceDto invoiceBalanceDto) {
 
-        InvoiceBalance invoiceBalance = mapInvoiceBalanceDtoToInvoiceBalance(invoiceBalanceDto);
+        InvoiceBalance invoiceBalance =  invoiceBalanceMapper.mapInvoice(invoiceBalanceDto);
         invoiceBalance = invoiceBalanceRepository.update(id, invoiceBalance);
-        return mapInvoiceBalanceToInvoiceBalanceDto(invoiceBalance);
+        return invoiceBalanceMapper.mapInvoiceDto(invoiceBalance);
     }
 
     @Override
     public InvoiceBalanceDto updateAmmount(int id, BigDecimal ammount) {
 
         InvoiceBalance invoiceBalance = invoiceBalanceRepository.updateAmmount(id, ammount);
-        return mapInvoiceBalanceToInvoiceBalanceDto(invoiceBalance);
-    }
-
-    private InvoiceBalanceDto mapInvoiceBalanceToInvoiceBalanceDto(final InvoiceBalance invoiceBalance) {
-
-        return InvoiceBalanceDto.builder()
-                .invoiceId(invoiceBalance.getInvoiceId())
-                .repairRequestId(invoiceBalance.getRepairRequestId())
-                .ammount(invoiceBalance.getAmmount())
-                .build();
-    }
-
-    private InvoiceBalance mapInvoiceBalanceDtoToInvoiceBalance(final InvoiceBalanceDto invoiceBalanceDto) {
-
-        return InvoiceBalance.builder()
-                .invoiceId(invoiceBalanceDto.getInvoiceId())
-                .repairRequestId(invoiceBalanceDto.getRepairRequestId())
-                .ammount(invoiceBalanceDto.getAmmount())
-                .build();
+        return invoiceBalanceMapper.mapInvoiceDto(invoiceBalance);
     }
 }
