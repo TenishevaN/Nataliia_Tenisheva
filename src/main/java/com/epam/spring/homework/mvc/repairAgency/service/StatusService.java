@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface StatusService {
 
-    StatusDto get(int idStatus, String locale);
+    StatusDto get(Long idStatus, String locale);
 
     List<StatusDto> getAll(String locale);
 }

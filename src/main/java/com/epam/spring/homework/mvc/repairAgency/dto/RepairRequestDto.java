@@ -16,6 +16,7 @@ public class RepairRequestDto {
     private String userName;
     private Long statusId;
     private Long masterId;
+    private String masterName;
     private BigDecimal cost;
     private Instant date;
 

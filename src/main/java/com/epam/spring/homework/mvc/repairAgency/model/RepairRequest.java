@@ -14,13 +14,20 @@ public class RepairRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = true, name = "account_id")
-    private Long userId;
-    @Column(nullable = true, name = "status_id")
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id", nullable = false)
+    private User user;
+
+    @Column(name = "status_id")
     private Long statusId;
-    @Column(nullable = true, name = "master_id")
-    private Long masterId;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "master_id", nullable = true)
+    private User master;
+
     private BigDecimal cost;
+    @Column(nullable = true, name = "date")
     private Instant date;
     private String description;
 }

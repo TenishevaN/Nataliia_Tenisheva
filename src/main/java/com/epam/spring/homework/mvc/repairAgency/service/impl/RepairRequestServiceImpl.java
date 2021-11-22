@@ -2,6 +2,8 @@ package com.epam.spring.homework.mvc.repairAgency.service.impl;
 
 import com.epam.spring.homework.mvc.repairAgency.dto.RepairRequestDto;
 import com.epam.spring.homework.mvc.repairAgency.mapper.RepairRequestMapper;
+import com.epam.spring.homework.mvc.repairAgency.repository.StatusRepository;
+import com.epam.spring.homework.mvc.repairAgency.repository.UserRepository;
 import com.epam.spring.homework.mvc.repairAgency.service.RepairRequestService;
 import com.epam.spring.homework.mvc.repairAgency.model.RepairRequest;
 import com.epam.spring.homework.mvc.repairAgency.repository.RepairRequestRepository;
@@ -13,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -23,6 +26,7 @@ import java.util.stream.Collectors;
 public class RepairRequestServiceImpl implements RepairRequestService {
 
     private final RepairRequestRepository repairRequestRepository;
+    private final UserRepository userRepository;
     private final RepairRequestMapper repairRequestMapper;
 
     @Override
@@ -37,10 +41,16 @@ public class RepairRequestServiceImpl implements RepairRequestService {
     @Override
     public List<RepairRequestDto> getAll() {
 
-        return repairRequestRepository.findAll()
-                .stream()
-                .map(repairRequestMapper::mapRepairRequestDto)
-                .collect(Collectors.toList());
+        List<RepairRequest> listRepairRequest = repairRequestRepository.findAll();
+        List<RepairRequestDto> list = new ArrayList<>();
+        for (RepairRequest item : listRepairRequest) {
+            RepairRequestDto newRR = repairRequestMapper.mapRepairRequestDto(item);
+            if (item.getMaster() != null) {
+                newRR.setMasterName(item.getMaster().getName());
+            }
+            list.add(newRR);
+        }
+        return list;
     }
 
     @Override
@@ -51,7 +61,9 @@ public class RepairRequestServiceImpl implements RepairRequestService {
         if (pagedResult.hasContent()) {
             return pagedResult.getContent()
                     .stream()
-                    .map(repairRequestMapper::mapRepairRequestDto)
+                    .map(
+                            repairRequestMapper::mapRepairRequestDto
+                    )
                     .collect(Collectors.toList());
         } else {
             return null;
@@ -60,9 +72,17 @@ public class RepairRequestServiceImpl implements RepairRequestService {
 
     @Override
     public RepairRequestDto add(final RepairRequestDto repairRequestDto) {
+
         RepairRequest repairRequest = repairRequestMapper.mapRepairRequest(repairRequestDto);
+        repairRequest.setUser(userRepository.getById(Long.valueOf(repairRequestDto.getUserId())));
+        repairRequest.setMaster(userRepository.getById(Long.valueOf(repairRequestDto.getMasterId())));
+        repairRequest.setStatusId(1L);
         repairRequest = repairRequestRepository.save(repairRequest);
-        return repairRequestMapper.mapRepairRequestDto(repairRequest);
+        RepairRequestDto updatedRepairRequestDto = repairRequestMapper.mapRepairRequestDto(repairRequest);
+        updatedRepairRequestDto.setUserName(repairRequest.getUser().getName());
+        updatedRepairRequestDto.setMasterName(repairRequest.getMaster().getName());
+
+        return updatedRepairRequestDto;
     }
 
     @Override
@@ -71,14 +91,16 @@ public class RepairRequestServiceImpl implements RepairRequestService {
         Optional<RepairRequest> repairRequestOptional = repairRequestRepository.findById(id);
         if (repairRequestOptional.isPresent()) {
             RepairRequest repairRequest = repairRequestOptional.get();
+            repairRequest.setUser(userRepository.getById(Long.valueOf(repairRequestDto.getUserId())));
             repairRequest.setDescription(repairRequestDto.getDescription());
             repairRequest.setCost(repairRequestDto.getCost());
-            repairRequest.setMasterId(repairRequestDto.getMasterId());
-            repairRequest.setStatusId(repairRequestDto.getStatusId());
             repairRequest.setDate(repairRequestDto.getDate());
             repairRequestRepository.save(repairRequest);
             log.info("repairRequest Updated {}", repairRequest);
-            return repairRequestMapper.mapRepairRequestDto(repairRequest);
+            RepairRequestDto updatedRepairRequestDto = repairRequestMapper.mapRepairRequestDto(repairRequest);
+            updatedRepairRequestDto.setUserName(repairRequest.getUser().getName());
+
+            return updatedRepairRequestDto;
         }
         return null;
     }

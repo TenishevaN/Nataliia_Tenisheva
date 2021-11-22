@@ -20,7 +20,7 @@ public class StatusServiceImpl implements StatusService {
     private final StatusRepository statusRepository;
 
     @Override
-    public StatusDto get(final int idStatus, final String locale) {
+    public StatusDto get(final Long idStatus, final String locale) {
         log.info("getStatus by id {}", idStatus);
         Status status = statusRepository.get(idStatus, locale);
         return mapStatusToStatusDto(status);

@@ -4,6 +4,9 @@ package com.epam.spring.homework.mvc.repairAgency.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "account")
@@ -18,11 +21,19 @@ public class User {
 
     private String name;
 
+    @Column(unique = true)
     private String email;
 
+    @NotNull
+    @Size(max = 128)
     private String password;
     @Column(nullable = true, name = "role_id")
     private Integer roleId;
     @Column(nullable = true, name = "invoice_id")
     private Integer invoiceId;
-}
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<RepairRequest> repairRequests;
+
+
+  }

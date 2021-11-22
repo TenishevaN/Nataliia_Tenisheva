@@ -21,7 +21,7 @@ public class StatusController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/status/{locale}/{id}")
-    public StatusDto getStatus(@PathVariable int id, @PathVariable String locale) {
+    public StatusDto getStatus(@PathVariable Long id, @PathVariable String locale) {
 
         StatusDto status = statusService.get(id, locale);
         if (status == null) {

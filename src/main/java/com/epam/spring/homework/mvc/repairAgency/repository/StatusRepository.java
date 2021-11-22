@@ -12,7 +12,7 @@ import java.util.List;
 public interface StatusRepository extends JpaRepository<Status, Long > {
 
     @Query(nativeQuery = true, value ="SELECT sl.name, sl.status_id, sl.language_id, l.code as locale, sl.id FROM status_localization sl left join language l on sl.language_id = l.id WHERE l.code = :locale and sl.status_id = :idStatus")
-    Status get(@Param("idStatus")int idStatus, @Param("locale") String locale);
+    Status get(@Param("idStatus") Long idStatus, @Param("locale") String locale);
 
 
     @Query(nativeQuery = true, value ="SELECT sl.name, sl.status_id, sl.language_id, l.code as locale, sl.id FROM status_localization sl left join language l on sl.language_id = l.id WHERE l.code = :locale order by sl.status_id")
