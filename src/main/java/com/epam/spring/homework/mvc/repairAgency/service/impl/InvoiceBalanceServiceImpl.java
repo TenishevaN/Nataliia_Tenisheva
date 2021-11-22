@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -23,17 +24,20 @@ public class InvoiceBalanceServiceImpl implements InvoiceBalanceService {
     private final InvoiceBalanceMapper invoiceBalanceMapper;
 
     @Override
-    public InvoiceBalanceDto get(final int id) {
+    public InvoiceBalanceDto get(final Long id) {
 
-        InvoiceBalance invoiceBalance = invoiceBalanceRepository.get(id);
-        return invoiceBalanceMapper.mapInvoiceDto(invoiceBalance);
+        Optional<InvoiceBalance> invoiceBalanceOptional = invoiceBalanceRepository.findById(id);
+        if (invoiceBalanceOptional.isPresent()) {
+            return invoiceBalanceMapper.mapInvoiceDto(invoiceBalanceOptional.get());
+        }
+        return null;
     }
 
 
     @Override
     public List<InvoiceBalanceDto> getAll() {
 
-        return invoiceBalanceRepository.getAll()
+        return invoiceBalanceRepository.findAll()
                 .stream()
                 .map(invoiceBalanceMapper::mapInvoiceDto)
                 .collect(Collectors.toList());
@@ -43,23 +47,38 @@ public class InvoiceBalanceServiceImpl implements InvoiceBalanceService {
     public InvoiceBalanceDto add(final InvoiceBalanceDto invoiceBalanceDto) {
 
         InvoiceBalance invoiceBalance = invoiceBalanceMapper.mapInvoice(invoiceBalanceDto);
-        invoiceBalance = invoiceBalanceRepository.add(invoiceBalance);
+        invoiceBalance = invoiceBalanceRepository.save(invoiceBalance);
         return invoiceBalanceMapper.mapInvoiceDto(invoiceBalance);
     }
 
 
     @Override
-    public InvoiceBalanceDto update(final int id, final InvoiceBalanceDto invoiceBalanceDto) {
+    public InvoiceBalanceDto update(final Long id, final InvoiceBalanceDto invoiceBalanceDto) {
 
-        InvoiceBalance invoiceBalance =  invoiceBalanceMapper.mapInvoice(invoiceBalanceDto);
-        invoiceBalance = invoiceBalanceRepository.update(id, invoiceBalance);
-        return invoiceBalanceMapper.mapInvoiceDto(invoiceBalance);
+        Optional<InvoiceBalance> invoiceBalanceOptional = invoiceBalanceRepository.findById(id);
+        if (invoiceBalanceOptional.isPresent()) {
+            InvoiceBalance invoiceBalance = invoiceBalanceOptional.get();
+            invoiceBalance.setAmmount(invoiceBalanceDto.getAmmount());
+
+            invoiceBalanceRepository.save(invoiceBalance);
+            log.info("invoiceBalance Updated {}", invoiceBalance);
+            return invoiceBalanceMapper.mapInvoiceDto(invoiceBalance);
+        }
+        return null;
     }
 
     @Override
-    public InvoiceBalanceDto updateAmmount(int id, BigDecimal ammount) {
+    public InvoiceBalanceDto updateAmmount(final Long id, final BigDecimal ammount) {
 
-        InvoiceBalance invoiceBalance = invoiceBalanceRepository.updateAmmount(id, ammount);
-        return invoiceBalanceMapper.mapInvoiceDto(invoiceBalance);
+        Optional<InvoiceBalance> optionalInvoiceBalance = invoiceBalanceRepository.findById(id);
+        log.info("invoiceBalance {}", optionalInvoiceBalance);
+        if (optionalInvoiceBalance.isPresent()) {
+            InvoiceBalance invoiceBalance = optionalInvoiceBalance.get();
+            invoiceBalance.setAmmount(ammount);
+            invoiceBalanceRepository.save(invoiceBalance);
+            log.info("invoiceBalanceUpdated {}", invoiceBalance);
+            return invoiceBalanceMapper.mapInvoiceDto(invoiceBalance);
+        }
+        return null;
     }
 }

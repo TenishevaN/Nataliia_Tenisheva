@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface InvoiceBalanceService {
 
-    InvoiceBalanceDto get(int id);
+    InvoiceBalanceDto get(Long id);
 
     List<InvoiceBalanceDto> getAll();
 
     InvoiceBalanceDto add(InvoiceBalanceDto invoiceBalanceDto);
 
-    InvoiceBalanceDto update(int id, InvoiceBalanceDto invoiceBalanceDto);
+    InvoiceBalanceDto update(Long id, InvoiceBalanceDto invoiceBalanceDto);
 
-    InvoiceBalanceDto updateAmmount(int id, BigDecimal ammount);
+    InvoiceBalanceDto updateAmmount(Long id, BigDecimal ammount);
 }

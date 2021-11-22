@@ -1,23 +1,17 @@
 package com.epam.spring.homework.mvc.repairAgency.repository;
 
 import com.epam.spring.homework.mvc.repairAgency.model.InvoiceBalance;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
 import java.util.List;
 
-public interface InvoiceBalanceRepository {
+@Repository
+public interface InvoiceBalanceRepository extends JpaRepository<InvoiceBalance, Long> {
 
-    InvoiceBalance get(int id);
+    List<InvoiceBalance> findAll();
 
-    List<InvoiceBalance> getAll();
+    InvoiceBalance save(InvoiceBalance invoiceBalance);
 
-    InvoiceBalance add(InvoiceBalance invoiceBalance);
 
-    InvoiceBalance update(int id, InvoiceBalance invoiceBalance);
-
-    BigDecimal getTotal(int id);
-
-    BigDecimal getBalanceOwed(int id);
-
-    InvoiceBalance updateAmmount(int id, BigDecimal ammount);
 }

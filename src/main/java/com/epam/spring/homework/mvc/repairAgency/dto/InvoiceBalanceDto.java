@@ -11,8 +11,8 @@ import java.math.BigDecimal;
 @Builder
 public class InvoiceBalanceDto {
 
-    private int invoiceId;
-    private int repairRequestId;
+    private Long invoiceId;
+    private Long repairRequestId;
 
     @Digits(integer = 10, fraction = 2)
     @NotNull

@@ -30,7 +30,7 @@ public class InvoiceBalanceController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/invoice-balance/{id}")
-    public InvoiceBalanceDto updateInvoiceBalance(@PathVariable int id, @Valid @RequestBody InvoiceBalanceDto invoiceBalanceDto) {
+    public InvoiceBalanceDto updateInvoiceBalance(@PathVariable Long id, @Valid @RequestBody InvoiceBalanceDto invoiceBalanceDto) {
 
         InvoiceBalanceDto invoiceBalance = invoiceBalanceService.update(id, invoiceBalanceDto);
         if (invoiceBalance == null) {
@@ -41,7 +41,7 @@ public class InvoiceBalanceController {
 
     @ResponseStatus(HttpStatus.OK)
     @PatchMapping(value = "/invoice-balance/{id}/{ammount}")
-    public InvoiceBalanceDto updateInvoiceBalanceAmmount(@PathVariable int id, @PathVariable BigDecimal ammount) {
+    public InvoiceBalanceDto updateInvoiceBalanceAmmount(@PathVariable Long id, @PathVariable BigDecimal ammount) {
 
         InvoiceBalanceDto invoiceBalance = invoiceBalanceService.updateAmmount(id, ammount);
         if (invoiceBalance == null) {
@@ -58,7 +58,7 @@ public class InvoiceBalanceController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/invoice-balance/{id}")
-    public InvoiceBalanceDto getInvoiceBalance(@PathVariable int id) {
+    public InvoiceBalanceDto getInvoiceBalance(@PathVariable Long id) {
 
         InvoiceBalanceDto invoiceBalance = invoiceBalanceService.get(id);
         if (invoiceBalance == null) {
