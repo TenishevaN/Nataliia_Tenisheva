@@ -31,7 +31,7 @@ public class InvoiceController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/invoice/{id}")
-    public InvoiceDto updateInvoice(@PathVariable int id, @Valid @RequestBody InvoiceDto invoiceDto) {
+    public InvoiceDto updateInvoice(@PathVariable Long id, @Valid @RequestBody InvoiceDto invoiceDto) {
 
         InvoiceDto findedInvoiceDto = invoiceService.update(id, invoiceDto);
         if (findedInvoiceDto == null) {
@@ -48,7 +48,7 @@ public class InvoiceController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/invoice/{id}")
-    public InvoiceDto getInvoice(@PathVariable int id) {
+    public InvoiceDto getInvoice(@PathVariable Long id) {
 
         InvoiceDto invoice = invoiceService.get(id);
         if (invoice == null) {
@@ -58,7 +58,7 @@ public class InvoiceController {
     }
 
     @DeleteMapping(value = "/invoice/{id}")
-    public ResponseEntity<Void> deleteInvoice(@PathVariable int id) {
+    public ResponseEntity<Void> deleteInvoice(@PathVariable Long id) {
         boolean invoiceDeleted = invoiceService.delete(id);
         if (!invoiceDeleted) {
             throw new EntityNotFoundException();

@@ -1,20 +1,16 @@
 package com.epam.spring.homework.mvc.repairAgency.repository;
 
 import com.epam.spring.homework.mvc.repairAgency.model.Invoice;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface InvoiceRepository {
+@Repository
+public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
 
+    List<Invoice> findAll();
 
-    Invoice get(int id);
-
-    List<Invoice> getAll();
-
-    Invoice add(Invoice invoice);
-
-    Invoice update(int id, Invoice invoice);
-
-    boolean delete(int id);
+    Invoice save(Invoice invoice);
 
 }

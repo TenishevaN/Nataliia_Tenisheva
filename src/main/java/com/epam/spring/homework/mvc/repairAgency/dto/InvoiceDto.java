@@ -11,9 +11,10 @@ import java.math.BigDecimal;
 @Builder
 public class InvoiceDto {
 
-  private int account_id;
+    private Long id;
+    private int accountId;
 
-  @Digits(integer = 10, fraction = 2)
-  @NotNull
-   private BigDecimal ammount;
+    @Digits(integer = 10, fraction = 2)
+    @NotNull
+    private BigDecimal ammount;
 }

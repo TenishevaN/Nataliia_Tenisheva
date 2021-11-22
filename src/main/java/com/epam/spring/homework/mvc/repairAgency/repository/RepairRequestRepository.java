@@ -9,8 +9,6 @@ import java.util.List;
 @Repository
 public interface RepairRequestRepository extends JpaRepository<RepairRequest, Long> {
 
-    RepairRequest findById(int id);
-
     List<RepairRequest> findAll();
 
     RepairRequest save(RepairRequest repairRequest);

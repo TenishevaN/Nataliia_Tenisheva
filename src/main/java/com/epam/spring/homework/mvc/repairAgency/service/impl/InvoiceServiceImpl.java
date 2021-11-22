@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -21,14 +22,18 @@ public class InvoiceServiceImpl implements InvoiceService {
     private final InvoiceMapper invoiceMapper;
 
     @Override
-    public InvoiceDto get(final int id) {
-        Invoice invoice = invoiceRepository.get(id);
-        return invoiceMapper.mapInvoiceDto(invoice);
+    public InvoiceDto get(final Long id) {
+
+        Optional<Invoice> invoiceOptional = invoiceRepository.findById(id);
+        if (invoiceOptional.isPresent()) {
+            return invoiceMapper.mapInvoiceDto(invoiceOptional.get());
+        }
+        return null;
     }
 
     @Override
     public List<InvoiceDto> getAll() {
-        return invoiceRepository.getAll()
+        return invoiceRepository.findAll()
                 .stream()
                 .map(invoiceMapper::mapInvoiceDto)
                 .collect(Collectors.toList());
@@ -38,21 +43,30 @@ public class InvoiceServiceImpl implements InvoiceService {
     public InvoiceDto add(final InvoiceDto invoiceDto) {
 
         Invoice invoice = invoiceMapper.mapInvoice(invoiceDto);
-        invoice = invoiceRepository.add(invoice);
+        invoice = invoiceRepository.save(invoice);
         return invoiceMapper.mapInvoiceDto(invoice);
     }
 
     @Override
-    public InvoiceDto update(final int id, final InvoiceDto invoiceDto) {
+    public InvoiceDto update(final Long id, final InvoiceDto invoiceDto) {
 
-        Invoice invoice = invoiceMapper.mapInvoice(invoiceDto);
-        invoice = invoiceRepository.update(id, invoice);
-        return invoiceMapper.mapInvoiceDto(invoice);
+        Optional<Invoice> invoiceOptional = invoiceRepository.findById(id);
+        if (invoiceOptional.isPresent()) {
+            Invoice invoice = invoiceOptional.get();
+            invoice.setAmmount(invoiceDto.getAmmount());
+
+            invoiceRepository.save(invoice);
+            log.info("invoice Updated {}", invoice);
+            return invoiceMapper.mapInvoiceDto(invoice);
+        }
+        return null;
     }
 
     @Override
-    public boolean delete(final int id) {
-        return invoiceRepository.delete(id);
+    public boolean delete(final Long id) {
+        log.info("delete Invoice by id {}", id);
+        invoiceRepository.deleteById(Long.valueOf(id));
+        return true;
     }
 
 }

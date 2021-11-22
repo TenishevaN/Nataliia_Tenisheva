@@ -1,15 +1,19 @@
 package com.epam.spring.homework.mvc.repairAgency.model;
 
-import lombok.Builder;
 import lombok.Data;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Data
-@Builder
+@Entity
+@Table(name = "invoice")
 public class Invoice {
 
-    private int id;
-    private int account_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "account_id")
+    private int accountId;
     private BigDecimal ammount;
 }

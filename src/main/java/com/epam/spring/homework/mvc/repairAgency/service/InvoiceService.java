@@ -6,14 +6,14 @@ import java.util.List;
 
 public interface InvoiceService {
 
-    InvoiceDto get(int id);
+    InvoiceDto get(Long id);
 
     List<InvoiceDto> getAll();
 
     InvoiceDto add(InvoiceDto invoiceDto);
 
-    InvoiceDto update(int id, InvoiceDto invoiceDto);
+    InvoiceDto update(Long id, InvoiceDto invoiceDto);
 
-    boolean delete(int id);
+    boolean delete(Long id);
 
 }
