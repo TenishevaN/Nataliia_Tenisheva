@@ -10,6 +10,8 @@ public interface RepairRequestService {
 
     List<RepairRequestDto> getAll();
 
+    List<RepairRequestDto> getAllSortedAndPaginated(int page);
+
     RepairRequestDto add(RepairRequestDto repairRequestDto);
 
     RepairRequestDto update(Long id, RepairRequestDto repairRequestDto);

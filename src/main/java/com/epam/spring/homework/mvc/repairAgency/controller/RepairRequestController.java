@@ -29,7 +29,7 @@ public class RepairRequestController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping(value = "/repair-request/{id}")
+    @PutMapping(value = "/repair-request/")
     public RepairRequestDto updateRepairRequest(@PathVariable Long id, @Valid @RequestBody RepairRequestDto repairRequestDto) {
 
         RepairRequestDto repairRequest = repairRequestService.update(id, repairRequestDto);
@@ -40,7 +40,13 @@ public class RepairRequestController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/repair-request")
+    @GetMapping(value = "/repair-request/page/{page}")
+    public List<RepairRequestDto> getAllPaginated(@PathVariable int page) {
+        return repairRequestService.getAllSortedAndPaginated(page);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = "/repair-request/")
     public List<RepairRequestDto> getAllRepairRequests() {
         return repairRequestService.getAll();
     }

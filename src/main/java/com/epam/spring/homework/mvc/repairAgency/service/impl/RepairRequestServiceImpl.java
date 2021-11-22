@@ -2,13 +2,16 @@ package com.epam.spring.homework.mvc.repairAgency.service.impl;
 
 import com.epam.spring.homework.mvc.repairAgency.dto.RepairRequestDto;
 import com.epam.spring.homework.mvc.repairAgency.mapper.RepairRequestMapper;
-import com.epam.spring.homework.mvc.repairAgency.model.User;
 import com.epam.spring.homework.mvc.repairAgency.service.RepairRequestService;
 import com.epam.spring.homework.mvc.repairAgency.model.RepairRequest;
 import com.epam.spring.homework.mvc.repairAgency.repository.RepairRequestRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,10 +36,26 @@ public class RepairRequestServiceImpl implements RepairRequestService {
 
     @Override
     public List<RepairRequestDto> getAll() {
+
         return repairRequestRepository.findAll()
                 .stream()
                 .map(repairRequestMapper::mapRepairRequestDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<RepairRequestDto> getAllSortedAndPaginated(int page) {
+
+        Pageable paging = PageRequest.of(page, 2, Sort.by("date").descending().and(Sort.by("cost").descending()));
+        Page<RepairRequest> pagedResult = repairRequestRepository.findAll(paging);
+        if (pagedResult.hasContent()) {
+            return pagedResult.getContent()
+                    .stream()
+                    .map(repairRequestMapper::mapRepairRequestDto)
+                    .collect(Collectors.toList());
+        } else {
+            return null;
+        }
     }
 
     @Override
