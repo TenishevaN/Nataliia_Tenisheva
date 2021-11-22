@@ -8,9 +8,9 @@ public interface AccountLocalizationService {
 
     AccountLocalizationDto add(AccountLocalizationDto accountLocalizationDto);
 
-    AccountLocalizationDto update(int id, AccountLocalizationDto accountLocalizationDto);
+    int update(final Long accountId, final Long languageId, String name);
 
-    List<AccountLocalizationDto> get(int id);
+    List<AccountLocalizationDto> getAllByUserId(final Long userId);
 
-    AccountLocalizationDto get(int userId, int languageId);
+    AccountLocalizationDto get(final Long userId, final Long languageId);
 }

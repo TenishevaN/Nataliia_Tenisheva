@@ -23,28 +23,30 @@ public class AccountLocalizationServiceImpl implements AccountLocalizationServic
     @Override
     public AccountLocalizationDto add(final AccountLocalizationDto accountLocalizationDto) {
         AccountLocalization accountLocalization = accountLocalizationMapper.mapAccountLocalization(accountLocalizationDto);
-        accountLocalization = accountLocalizationRepository.add(accountLocalization);
+        accountLocalization = accountLocalizationRepository.save(accountLocalization);
         return accountLocalizationMapper.mapAccountLocalizationDto(accountLocalization);
     }
 
     @Override
-    public AccountLocalizationDto update(final int id, final AccountLocalizationDto accountLocalizationDto) {
-        AccountLocalization accountLocalization = accountLocalizationMapper.mapAccountLocalization(accountLocalizationDto);
-        accountLocalization = accountLocalizationRepository.update(id, accountLocalization);
-        return accountLocalizationMapper.mapAccountLocalizationDto(accountLocalization);
+    public int update(final Long accountId, final Long languageId, String name) {
+
+        int result = accountLocalizationRepository.updateByAccountIdAndLanuageId(name, accountId, languageId);
+        return result;
+
     }
 
     @Override
-    public List<AccountLocalizationDto> get(final int id) {
-        return accountLocalizationRepository.get(id)
+    public List<AccountLocalizationDto> getAllByUserId(final Long userId) {
+
+        return accountLocalizationRepository.findByAccountId(userId)
                 .stream()
                 .map(accountLocalizationMapper::mapAccountLocalizationDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public AccountLocalizationDto get(final int userId, final int languageId) {
-        AccountLocalization accountLocalization = accountLocalizationRepository.get(userId, languageId);
+    public AccountLocalizationDto get(final Long userId, final Long languageId) {
+        AccountLocalization accountLocalization = accountLocalizationRepository.findByAccountIdAndLanuageId(userId, languageId);
         return accountLocalizationMapper.mapAccountLocalizationDto(accountLocalization);
     }
 }
