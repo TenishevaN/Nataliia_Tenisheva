@@ -1,6 +1,5 @@
 package com.epam.spring.homework.mvc.repairAgency.controller;
 
-import com.epam.spring.homework.mvc.repairAgency.dto.InvoiceBalanceDto;
 import com.epam.spring.homework.mvc.repairAgency.dto.UserDto;
 import com.epam.spring.homework.mvc.repairAgency.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
-import java.math.BigDecimal;
 import java.util.List;
 
 @Slf4j
