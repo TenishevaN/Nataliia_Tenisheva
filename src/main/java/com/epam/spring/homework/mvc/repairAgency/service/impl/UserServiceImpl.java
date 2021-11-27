@@ -25,7 +25,9 @@ public class UserServiceImpl implements UserService {
     public UserDto getUser(String login) {
         log.info("getUser by login {}", login);
         User user = userRepository.findByLogin(login);
-        return userMapper.mapUserDto(user);
+        log.info("getUser by user {}", user);
+        log.info("userMapper {}", userMapper);
+         return userMapper.mapUserDto(user);
     }
 
     @Override
@@ -39,16 +41,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto createUser(final UserDto userDto) {
-        log.info("createUser with email {}", userDto.getEmail());
+        log.info("createUser with name {}", userDto.getName());
         User user = userMapper.mapUser(userDto);
         user.setRoleId(1);
         user.setPassword("4564");
         user = userRepository.save(user);
+        log.info("createdUser  {}", user);
         return userMapper.mapUserDto(user);
     }
 
     @Override
-    public UserDto updateUser(final String login, final UserDto userDto) {
+    public UserDto updateUser(final UserDto userDto) {
 
         User user = userRepository.findByLogin(userDto.getLogin());
         user.setName(userDto.getName());

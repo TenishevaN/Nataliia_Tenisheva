@@ -48,9 +48,9 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/user/{login}")
-    public UserDto updateUser(@PathVariable String login, @Valid @RequestBody UserDto userDto) {
+    public UserDto updateUser(@Valid @RequestBody UserDto userDto) {
 
-        UserDto updatedUser = userService.updateUser(login, userDto);
+        UserDto updatedUser = userService.updateUser(userDto);
         if (updatedUser == null) {
             throw new NullPointerException();
         }

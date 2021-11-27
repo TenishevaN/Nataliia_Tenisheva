@@ -35,5 +35,11 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<RepairRequest> repairRequests;
 
+    public User(String login) {
+        this.login = login;
+    }
 
-  }
+    public User() {
+
+    }
+}

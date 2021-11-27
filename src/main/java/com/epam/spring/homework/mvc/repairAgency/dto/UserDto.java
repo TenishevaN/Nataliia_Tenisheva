@@ -2,8 +2,6 @@ package com.epam.spring.homework.mvc.repairAgency.dto;
 
 import lombok.Builder;
 import lombok.Data;
-
-import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -26,5 +24,4 @@ public class UserDto {
 
     private Integer roleId;
     private Integer invoiceId;
-
 }
