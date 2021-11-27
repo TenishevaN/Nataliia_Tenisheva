@@ -41,7 +41,7 @@ public class ErrorHandler {
     }
 
     @ExceptionHandler(NullPointerException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handleNullPointerException(NullPointerException ex) {
         return "Null pointer exception";
     }

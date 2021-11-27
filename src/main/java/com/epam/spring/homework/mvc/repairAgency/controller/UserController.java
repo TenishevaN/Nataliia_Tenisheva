@@ -19,7 +19,7 @@ public class UserController {
     private final UserService userService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/user")
+    @GetMapping(value = "/user/")
     public List<UserDto> getAllUsers() {
         return userService.listUsers();
     }
