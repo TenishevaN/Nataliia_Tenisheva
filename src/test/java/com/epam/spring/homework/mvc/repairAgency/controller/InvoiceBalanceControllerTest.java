@@ -1,8 +1,11 @@
 package com.epam.spring.homework.mvc.repairAgency.controller;
+
+import com.epam.spring.homework.mvc.repairAgency.dto.AccountLocalizationDto;
 import com.epam.spring.homework.mvc.repairAgency.dto.InvoiceBalanceDto;
 import com.epam.spring.homework.mvc.repairAgency.service.InvoiceBalanceService;
 import com.epam.spring.homework.mvc.repairAgency.test.config.TestWebConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -27,21 +30,24 @@ public class InvoiceBalanceControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-
     @MockBean
     private InvoiceBalanceService invoiceBalanceService;
 
     private final ObjectMapper mapper = new ObjectMapper();
+    private static InvoiceBalanceDto invoiceBalanceDto;
 
+    @BeforeAll
+    static void initializateValues() {
+
+        invoiceBalanceDto = InvoiceBalanceDto
+                .builder()
+                .build();
+    }
 
     @Test
     void validateAmmountFieldTest() throws Exception {
 
-        InvoiceBalanceDto invoiceBalanceDto = InvoiceBalanceDto
-                .builder()
-                .ammount(BigDecimal.valueOf(1.5555555))
-                .build();
-
+        invoiceBalanceDto.setAmmount(BigDecimal.valueOf(1.5555555));
         given(invoiceBalanceService.add(any(InvoiceBalanceDto.class))).willReturn(invoiceBalanceDto);
 
         mockMvc.perform(post("/invoice-balance")
@@ -56,10 +62,6 @@ public class InvoiceBalanceControllerTest {
 
     @Test
     void validateAmmountFieldNotNullTest() throws Exception {
-
-        InvoiceBalanceDto invoiceBalanceDto = InvoiceBalanceDto
-                .builder()
-                .build();
 
         given(invoiceBalanceService.add(any(InvoiceBalanceDto.class))).willReturn(invoiceBalanceDto);
 
