@@ -10,7 +10,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.when;
 
 
@@ -26,7 +33,7 @@ public class StatusServiceImplTest {
 
 
     @Test
-    void getUserByLoginTest(){
+    void getStatusTest() {
 
         //given
         Status expectedStatus = new Status();
@@ -40,5 +47,26 @@ public class StatusServiceImplTest {
 
         //then
         assertEquals(expectedStatus.getName(), actualStatus.getName());
+    }
+
+    @Test
+    void getAllStatusTest() {
+
+        //given
+        Status expectedStatusNew = new Status();
+        expectedStatusNew.setName("new");
+        Status expectedStatusClosed = new Status();
+        expectedStatusClosed.setName("closed");
+
+        List<StatusDto> expectedStatuses = new ArrayList<>();
+
+        when(statusRepository.getAll("en")).thenReturn((Arrays.asList(expectedStatusNew, expectedStatusClosed)));
+
+        //when
+        List<StatusDto> actualStatuses = statusService.getAll("en");
+
+        //then
+        assertThat(actualStatuses, hasSize(2));
+      assertEquals("closed", actualStatuses.get(1).getName());
     }
 }
