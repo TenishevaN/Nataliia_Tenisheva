@@ -17,13 +17,13 @@ import javax.persistence.EntityNotFoundException;
 public class ErrorHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     public ResponseEntity<ErrorResponse> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex,
             WebRequest request
     ) {
         ErrorResponse errorResponse = new ErrorResponse(
-                HttpStatus.UNPROCESSABLE_ENTITY.value(),
+                HttpStatus.NOT_ACCEPTABLE.value(),
                 "Validation error. Check 'errors' field for details."
         );
 
@@ -31,7 +31,7 @@ public class ErrorHandler {
             errorResponse.addValidationError(fieldError.getField(),
                     fieldError.getDefaultMessage());
         }
-        return ResponseEntity.unprocessableEntity().body(errorResponse);
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(errorResponse);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)

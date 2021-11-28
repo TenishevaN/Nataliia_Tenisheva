@@ -10,6 +10,8 @@ import javax.validation.constraints.Pattern;
 @Builder
 public class UserDto {
 
+    private Long id;
+
     @NotBlank
     @Pattern(regexp = "^[a-zA-Z0-9]+$")
     private String login;

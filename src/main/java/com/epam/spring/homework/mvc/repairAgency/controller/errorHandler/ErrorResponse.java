@@ -19,12 +19,12 @@ public class ErrorResponse {
 
     @Data
     @RequiredArgsConstructor
-    private static class ValidationError {
+    public static class ValidationError {
         private final String field;
         private final String message;
     }
 
-    public void addValidationError(String field, String message){
+    void addValidationError(String field, String message){
         if(Objects.isNull(errors)){
             errors = new ArrayList<>();
         }

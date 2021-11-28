@@ -19,7 +19,7 @@ public class UserController {
     private final UserService userService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/user/")
+    @GetMapping(value = "/user")
     public List<UserDto> getAllUsers() {
         return userService.listUsers();
     }
@@ -37,7 +37,7 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/user")
-    public UserDto createUser(@Valid @RequestBody UserDto userDto) {
+    public UserDto createUser(@Valid @RequestBody(required = false) UserDto userDto) {
 
         UserDto newUser = userService.createUser(userDto);
         if (newUser == null) {
@@ -47,7 +47,7 @@ public class UserController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping(value = "/user/{login}")
+    @PutMapping(value = "/user")
     public UserDto updateUser(@Valid @RequestBody UserDto userDto) {
 
         UserDto updatedUser = userService.updateUser(userDto);

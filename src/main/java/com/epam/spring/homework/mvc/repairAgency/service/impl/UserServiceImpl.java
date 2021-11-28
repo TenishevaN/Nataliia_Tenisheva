@@ -7,7 +7,6 @@ import com.epam.spring.homework.mvc.repairAgency.model.User;
 import com.epam.spring.homework.mvc.repairAgency.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,11 +23,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUser(String login) {
+
         log.info("getUser by login {}", login);
         User user = userRepository.findByLogin(login);
-        log.info("getUser by user {}", user);
-        log.info("userMapper {}", userMapper);
-         return userMapper.mapUserDto(user);
+        return userMapper.mapUserDto(user);
     }
 
     @Override
