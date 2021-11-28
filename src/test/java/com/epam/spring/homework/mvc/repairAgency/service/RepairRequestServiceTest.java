@@ -37,7 +37,7 @@ public class RepairRequestServiceTest {
 
 
     @Test
-    void getRepairRequestById() {
+    void getRepairRequestByIdTest() {
 
         //given
         RepairRequest expectedRepairRequest = new RepairRequest();
@@ -79,7 +79,7 @@ public class RepairRequestServiceTest {
     }
 
     @Test
-    void createRepairRequest() {
+    void createRepairRequestTest() {
 
         //given
         RepairRequest expectedRepairRequest = new RepairRequest();
@@ -94,7 +94,7 @@ public class RepairRequestServiceTest {
     }
 
     @Test
-    void updateRepairRequest() {
+    void updateRepairRequestTest() {
 
         final String UPDATE_DESCRIPTION = "update description";
         //given
@@ -114,7 +114,7 @@ public class RepairRequestServiceTest {
     }
 
     @Test
-    void deleteRepairRequest() {
+    void deleteRepairRequestTest() {
 
         //given
         doNothing().when(repairRequestRepository).deleteById(1L);
