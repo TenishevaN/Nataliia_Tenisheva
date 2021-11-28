@@ -2,7 +2,6 @@ package com.epam.spring.homework.mvc.repairAgency.service.impl;
 
 import com.epam.spring.homework.mvc.repairAgency.dto.RepairRequestDto;
 import com.epam.spring.homework.mvc.repairAgency.mapper.RepairRequestMapper;
-import com.epam.spring.homework.mvc.repairAgency.repository.StatusRepository;
 import com.epam.spring.homework.mvc.repairAgency.repository.UserRepository;
 import com.epam.spring.homework.mvc.repairAgency.service.RepairRequestService;
 import com.epam.spring.homework.mvc.repairAgency.model.RepairRequest;
@@ -74,13 +73,17 @@ public class RepairRequestServiceImpl implements RepairRequestService {
     public RepairRequestDto add(final RepairRequestDto repairRequestDto) {
 
         RepairRequest repairRequest = repairRequestMapper.mapRepairRequest(repairRequestDto);
-        repairRequest.setUser(userRepository.getById(Long.valueOf(repairRequestDto.getUserId())));
-        repairRequest.setMaster(userRepository.getById(Long.valueOf(repairRequestDto.getMasterId())));
-        repairRequest.setStatusId(1L);
-        repairRequest = repairRequestRepository.save(repairRequest);
         RepairRequestDto updatedRepairRequestDto = repairRequestMapper.mapRepairRequestDto(repairRequest);
-        updatedRepairRequestDto.setUserName(repairRequest.getUser().getName());
-        updatedRepairRequestDto.setMasterName(repairRequest.getMaster().getName());
+        if (repairRequestDto.getUserId() != null) {
+            repairRequest.setUser(userRepository.getById(Long.valueOf(repairRequestDto.getUserId())));
+            updatedRepairRequestDto.setUserName(repairRequest.getUser().getName());
+        }
+        if (repairRequestDto.getMasterId() != null) {
+            repairRequest.setMaster(userRepository.getById(Long.valueOf(repairRequestDto.getMasterId())));
+            updatedRepairRequestDto.setMasterName(repairRequest.getMaster().getName());
+        }
+        repairRequest.setStatusId(1L);
+        repairRequestRepository.save(repairRequest);
 
         return updatedRepairRequestDto;
     }
@@ -89,16 +92,20 @@ public class RepairRequestServiceImpl implements RepairRequestService {
     public RepairRequestDto update(final Long id, final RepairRequestDto repairRequestDto) {
 
         Optional<RepairRequest> repairRequestOptional = repairRequestRepository.findById(id);
+        RepairRequestDto updatedRepairRequestDto = null;
+
         if (repairRequestOptional.isPresent()) {
             RepairRequest repairRequest = repairRequestOptional.get();
-            repairRequest.setUser(userRepository.getById(Long.valueOf(repairRequestDto.getUserId())));
+            updatedRepairRequestDto = repairRequestMapper.mapRepairRequestDto(repairRequest);
+            if (repairRequestDto.getUserId() != null) {
+                repairRequest.setUser(userRepository.getById(Long.valueOf(repairRequestDto.getUserId())));
+                updatedRepairRequestDto.setUserName(repairRequest.getUser().getName());
+            }
             repairRequest.setDescription(repairRequestDto.getDescription());
             repairRequest.setCost(repairRequestDto.getCost());
             repairRequest.setDate(repairRequestDto.getDate());
             repairRequestRepository.save(repairRequest);
             log.info("repairRequest Updated {}", repairRequest);
-            RepairRequestDto updatedRepairRequestDto = repairRequestMapper.mapRepairRequestDto(repairRequest);
-            updatedRepairRequestDto.setUserName(repairRequest.getUser().getName());
 
             return updatedRepairRequestDto;
         }
