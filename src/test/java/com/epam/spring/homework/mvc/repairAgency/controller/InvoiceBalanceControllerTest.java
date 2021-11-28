@@ -59,7 +59,7 @@ public class InvoiceBalanceControllerTest {
         given(invoiceBalanceService.add(any(InvoiceBalanceDto.class))).willReturn(invoiceBalanceWithAmmountDto);
 
         mockMvc.perform(post("/invoice-balance")
-                        .content(mapper.writeValueAsString(invoiceBalanceDto))
+                        .content(mapper.writeValueAsString(invoiceBalanceWithAmmountDto))
                         .contentType(APPLICATION_JSON)
                 )
                 .andExpect(status().isCreated())
@@ -74,7 +74,7 @@ public class InvoiceBalanceControllerTest {
         given(invoiceBalanceService.update(anyLong(), any(InvoiceBalanceDto.class))).willReturn(invoiceBalanceWithAmmountDto);
 
         mockMvc.perform(put("/invoice-balance/{id}", 1L)
-                        .content(mapper.writeValueAsString(invoiceBalanceDto))
+                        .content(mapper.writeValueAsString(invoiceBalanceWithAmmountDto))
                         .contentType(APPLICATION_JSON)
                 )
                 .andExpect(status().isOk())
