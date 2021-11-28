@@ -8,6 +8,7 @@ import com.epam.spring.homework.mvc.repairAgency.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,5 +43,4 @@ public class ReviewServiceImpl implements ReviewService {
                 .map(reviewMapper::mapReviewDto)
                 .collect(Collectors.toList());
     }
-
 }

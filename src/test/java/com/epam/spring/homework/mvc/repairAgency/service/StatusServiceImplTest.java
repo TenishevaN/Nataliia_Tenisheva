@@ -67,6 +67,6 @@ public class StatusServiceImplTest {
 
         //then
         assertThat(actualStatuses, hasSize(2));
-      assertEquals("closed", actualStatuses.get(1).getName());
+        assertEquals("closed", actualStatuses.get(1).getName());
     }
 }
