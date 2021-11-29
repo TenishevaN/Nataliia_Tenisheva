@@ -38,6 +38,7 @@ public class UserControllerTest {
 
     private final ObjectMapper mapper = new ObjectMapper();
 
+
     @Test
     public void getAllUsers() throws Exception {
 
