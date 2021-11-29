@@ -29,7 +29,7 @@ public class RepairRequestController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping(value = "/repair-request/")
+    @PutMapping(value = "/repair-request/{id}")
     public RepairRequestDto updateRepairRequest(@PathVariable Long id, @Valid @RequestBody RepairRequestDto repairRequestDto) {
 
         RepairRequestDto repairRequest = repairRequestService.update(id, repairRequestDto);
@@ -46,7 +46,7 @@ public class RepairRequestController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/repair-request/")
+    @GetMapping(value = "/repair-request")
     public List<RepairRequestDto> getAllRepairRequests() {
         return repairRequestService.getAll();
     }
