@@ -12,3 +12,4 @@ withSonarQubeEnv(installationName: 'sql'){
 }
 }
 }
+}
