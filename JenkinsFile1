@@ -1,13 +1,15 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+               stage('SonarQube analysis') {
             steps {
-                def scannerHome = tool 'SonarQubeScanner3'
-                withSonarQubeEnv('SonarQube') {
-                    sh "D:/sonar-scanner-4.6.2.2472-windows/bin/bin/sonar-scanner"
-                }
+              withSonarQubeEnv(SonarQube') {
+
+                  sh 'mvn clean package sonar:sonar'
+                  }
             }
         }
     }
 }
+
+
