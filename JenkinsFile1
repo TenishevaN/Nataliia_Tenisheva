@@ -1,18 +1,13 @@
 pipeline {
     agent any
     stages {
-        stage('Clone sources') {
+        stage('Build') {
             steps {
-                git url: 'https://github.com/tkgregory/sonarqube-jacoco-code-coverage.git'
-            }
-        }
-        stage('SonarQube analysis') {
-            steps {
-                withSonarQubeEnv('sonarrun') {
-                    sh 'mvn clean package sonar:sonar'
-                                   }
+                def scannerHome = tool 'SonarQubeScanner3'
+                withSonarQubeEnv('SonarQube') {
+                    sh "D:/sonar-scanner-4.6.2.2472-windows/bin/bin/sonar-scanner"
+                }
             }
         }
     }
 }
-
