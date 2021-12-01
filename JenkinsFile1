@@ -9,7 +9,7 @@ stages {
 stage('Scan'){
 steps{
 withSonarQubeEnv(installationName: 'sonarrun'){
- bat './mvn clean org.sonarsource.scanner.maven: sonar-maven-plugin:3.9.0.2155:sonar'
+ bat "${scannerHome}/bin/sonar-scanner"
 }
 }
 }
