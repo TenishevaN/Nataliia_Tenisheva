@@ -7,3 +7,4 @@
 /dataSources/
 /dataSources.local.xml
 --ignore-errors -A -- src/main/java/META-INF/MANIFEST.MF
+--ignore-errors -A -- .idea/artifacts/draftHelloWorld_jar.xml
