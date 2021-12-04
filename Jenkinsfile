@@ -1,9 +1,10 @@
 
-node('docker') {
-    stage 'Checkout'
-        checkout scm
-    stage 'Build & UnitTest'
-          bat 'docker build -t starr .'
-
+pipeline { 
+stages {
+  stage('Building image') {
+    steps{
+     bat 'docker build -t starr .'
+    }
+  }
 }
-
+}
