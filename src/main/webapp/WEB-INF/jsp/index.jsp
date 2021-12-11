@@ -9,7 +9,8 @@
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/java_script_dynamic.js"></script>
+    <script type="text/javascript" src="js/java_script_dynamics.js"></script>
+
 </head>
 <body>
 
@@ -21,25 +22,13 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="custom-margin-1">
-                    <a href="<c:url value="changeLocale.jsp">
-                        <c:param name="action" value="post"/>
-                        <c:param name="locale" value="uk"/>
-                        <c:param name="page" value="index.jsp"/>
-                        </c:url>">UA</a>
-                </li>
-                <li>
-                    <a href="<c:url value="changeLocale.jsp">
-                        <c:param name="action" value="post"/>
-                        <c:param name="locale" value="ru"/>
-                        <c:param name="page" value="index.jsp"/>
-                        </c:url>">RU</a>
-                </li>
-                <li>
-                    <a href="<c:url value="changeLocale.jsp">
-                        <c:param name="action" value="post"/>
-                        <c:param name="locale" value="en"/>
-                        <c:param name="page" value="index.jsp"/>
-                        </c:url>">EN</a>
+                    <br>
+                       <select id="locales">
+                           <option value="Choose"></option>
+                         <option value="uk">UK</option>
+                        <option value="en" >EN</option>
+                        <option value="ru" >RU</option>
+                    </select>
                 </li>
                 <li><a href=#insertModalLoginPage" data-toggle="modal"
                        data-target="#insertModalRegistrationPage"><span

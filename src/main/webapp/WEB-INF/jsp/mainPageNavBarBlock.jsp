@@ -11,7 +11,7 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="controller?command=openCardUser&id="${user.id}"><fmt:message
                         key="profile"></fmt:message></a></li>
-                <li><a href="${pageContext.request.contextPath}/request"><fmt:message key="repair_requests"></fmt:message></a></li>
+                <li><a href="${pageContext.request.contextPath}/repair-request"><fmt:message key="repair_requests"></fmt:message></a></li>
                 <c:set var="role" value="${fn:toLowerCase(role)}"></c:set>
                 <c:if test="${role != 'user' && role != 'master'}">
                     <li><a href="${pageContext.request.contextPath}/user"><fmt:message key="users"></fmt:message></a></li>

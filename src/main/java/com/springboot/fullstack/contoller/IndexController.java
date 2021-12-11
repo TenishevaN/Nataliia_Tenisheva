@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @RequiredArgsConstructor
 public class IndexController {
 
+
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/")
     public String getFirstPage() {
         return "index";
     }
-}
+ }

@@ -257,8 +257,7 @@
                         </archive>
                     </configuration>
                 </plugin>
-
-            </plugins>
+                </plugins>
         </pluginManagement>
         <plugins>
             <plugin>
@@ -295,6 +294,7 @@
                     </compilerArgs>
                 </configuration>
             </plugin>
+
         </plugins>
 
     </build>

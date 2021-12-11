@@ -8,6 +8,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
@@ -24,25 +25,31 @@ public class LocaleConfig implements WebMvcConfigurer{
 
     @Bean
     public LocaleResolver localeResolver() {
+
         SessionLocaleResolver slr = new SessionLocaleResolver();
         slr.setDefaultLocale(Locale.ENGLISH);
-        slr.setLocaleAttributeName("current.locale");
-        slr.setTimeZoneAttributeName("current.timezone");
         return slr;
     }
 
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
-        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
-        localeChangeInterceptor.setParamName("language");
-        return localeChangeInterceptor;
+
+        LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
+        lci.setParamName("locale");
+         return lci;
     }
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
-        localeChangeInterceptor.setParamName("lang");
-        registry.addInterceptor(localeChangeInterceptor);
+    @Bean
+    public WebMvcConfigurer configurer () {
+
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addInterceptors (InterceptorRegistry registry) {
+                LocaleChangeInterceptor l = new LocaleChangeInterceptor();
+                l.setParamName("locale");
+                registry.addInterceptor(l);
+            }
+        };
     }
 
 }
