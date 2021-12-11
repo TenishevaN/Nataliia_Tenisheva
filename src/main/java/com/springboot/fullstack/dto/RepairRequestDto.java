@@ -5,7 +5,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.util.Date;
 
 @Data
 @Builder
@@ -18,7 +18,7 @@ public class RepairRequestDto {
     private Long masterId;
     private String masterName;
     private BigDecimal cost;
-    private Instant date;
+    private Date date;
 
     @NotBlank
     private String description;

@@ -26,7 +26,7 @@ public class FieldMasterTag extends SimpleTagSupport {
 
     private int idMaster;
     private String nameRole;
-    private String currentLocale;
+    private String currentLocale = "en";
     private String area;
     private int idLocale;
     private User currentMaster;
@@ -39,7 +39,13 @@ public class FieldMasterTag extends SimpleTagSupport {
     }
 
     public void setIdMaster(String idMaster) {
-        this.idMaster = Integer.parseInt(idMaster);
+
+        System.out.println(" currentLocale m " + currentLocale);
+        System.out.println(" idMaster " + idMaster);
+        if(!idMaster.isEmpty()) {
+            this.idMaster = Integer.parseInt(idMaster);
+            currentMaster = userRepository.getById(Long.valueOf(idMaster));
+        }
     }
 
     public void setNameRole(String nameRole) {
@@ -68,7 +74,7 @@ public class FieldMasterTag extends SimpleTagSupport {
 
     private String getOutput() {
 
-        currentMaster = userRepository.getById(Long.valueOf(idMaster));
+
         idLocale = Language.getId(currentLocale);
         if (area.equals("list")) {
             return formOutPutForList();

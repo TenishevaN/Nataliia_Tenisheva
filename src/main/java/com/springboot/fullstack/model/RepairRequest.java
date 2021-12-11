@@ -4,7 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.util.Date;
+
 
 @Data
 @Entity
@@ -28,6 +29,6 @@ public class RepairRequest {
 
     private BigDecimal cost;
     @Column(nullable = true, name = "date")
-    private Instant date;
+    private Date date;
     private String description;
 }

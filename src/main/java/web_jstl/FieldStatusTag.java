@@ -4,6 +4,7 @@ import com.springboot.fullstack.model.Status;
 import com.springboot.fullstack.repository.StatusRepository;
 import com.springboot.fullstack.service.StatusService;
 import org.apache.logging.log4j.LogManager;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
@@ -28,7 +29,9 @@ public class FieldStatusTag extends SimpleTagSupport {
     private String area;
     private String output;
     private List<Status> listStatus;
+
     private StatusService statusService;
+    @Autowired
     private StatusRepository statusRepository;
 
     public void setIdStatus(String idStatus) {
@@ -61,11 +64,18 @@ public class FieldStatusTag extends SimpleTagSupport {
 
     private String getOutput() {
 
+        System.out.println("listStatus beore ");
+//        System.out.println("listStatus1 "+ statusRepository.getAll("en"));
 
-        listStatus = statusRepository.getAll(currentLocale);
+        System.out.println("idStatus "+ idStatus);
+        System.out.println("currentLocale "+ currentLocale);
+
+//        listStatus = statusRepository.getAll(currentLocale);
+        System.out.println("listStatus "+ listStatus);
 
         if (area.equals("list")) {
-            return statusService.get(Long.valueOf(idStatus), currentLocale).toString();
+       //     return statusService.get(Long.valueOf(idStatus), currentLocale).toString();
+            return "";
         }
         if ("admin".equals(nameRole)) {
             return formStatusSelectForAdmin();
