@@ -10,7 +10,7 @@ public interface UserService {
 
     List<UserDto> listUsers();
 
-    UserDto createUser(UserDto userDto);
+    UserDto createUser(UserDto userDto, String password);
 
     UserDto updateUser(UserDto userDto);
 

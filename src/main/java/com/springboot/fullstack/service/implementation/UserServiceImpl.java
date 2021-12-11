@@ -8,6 +8,7 @@ import com.springboot.fullstack.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import util.Security;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,11 +40,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto createUser(final UserDto userDto) {
+    public UserDto createUser(final UserDto userDto, String password) {
         log.info("createUser with name {}", userDto.getName());
         User user = userMapper.mapUser(userDto);
         user.setRoleId(1);
-        user.setPassword("4564");
+        user.setPassword(Security.encrypt(password));
         user = userRepository.save(user);
         log.info("createdUser  {}", user);
         return userMapper.mapUserDto(user);

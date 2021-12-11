@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
@@ -45,23 +44,23 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/user")
-    public ModelAndView createUser(@Valid UserDto userDto) {
-        UserDto newUser = userService.createUser(userDto);
+    public ModelAndView createUser(@Valid UserDto userDto, String password) {
+
+        UserDto newUser = userService.createUser(userDto, password);
         if (newUser == null) {
             throw new NullPointerException();
         }
-        ModelAndView modelAndView = new ModelAndView(
-                new RedirectView("/user", false));
+        ModelAndView modelAndView = new ModelAndView();
         modelAndView.getModel().put("user", newUser);
+        modelAndView.setViewName("mainPage");
         return modelAndView;
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(value = "/user/update")
     public ModelAndView updateUser(@Valid UserDto userDto) {
-        System.out.println("userDto "+ userDto);
+
         UserDto updatedUser = userService.updateUser(userDto);
-        System.out.println("updatedUser "+ updatedUser);
         if (updatedUser == null) {
             throw new NullPointerException();
         }

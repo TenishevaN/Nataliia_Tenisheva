@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityNotFoundException;
+
 import org.springframework.validation.BindException;
 
 
@@ -15,9 +16,9 @@ import org.springframework.validation.BindException;
 public class ErrorHandler {
 
     @ExceptionHandler(BindException.class)
-    public ModelAndView bindExceptionHandler(BindException ex){
+    public ModelAndView bindExceptionHandler(BindException ex) {
 
-           ErrorMessage errorMessage = new ErrorMessage(
+        ErrorMessage errorMessage = new ErrorMessage(
                 HttpStatus.NOT_ACCEPTABLE.value(),
                 ex.getMessage());
         ModelAndView mav = new ModelAndView();
@@ -46,7 +47,7 @@ public class ErrorHandler {
     }
 
     @ExceptionHandler(NullPointerException.class)
-     public ModelAndView handleNullPointerException(NullPointerException ex) {
+    public ModelAndView handleNullPointerException(NullPointerException ex) {
         String message = "There is no such object";
         ErrorMessage errorMessage = new ErrorMessage(
                 HttpStatus.BAD_REQUEST.value(),
@@ -60,8 +61,27 @@ public class ErrorHandler {
         return mav;
     }
 
+    @ExceptionHandler(CustomException.class)
+    public ModelAndView handleCustomException(CustomException ex) {
+
+        String message = ex.getTxtMessage();
+        ErrorMessage errorMessage = new ErrorMessage(
+                HttpStatus.BAD_REQUEST.value(),
+                message);
+        ModelAndView mav = new ModelAndView();
+        System.out.println("ex.getMessage() " + ex.getMessage());
+        System.out.println("ex.getTxtMessage() " + message);
+        System.out.println("errorMessage " + errorMessage);
+        mav.addObject("errorText", message);
+        mav.setStatus(HttpStatus.BAD_REQUEST);
+        mav.setViewName("error");
+        mav.getModel().put("errorMessage", errorMessage);
+
+        return mav;
+    }
+
     @ExceptionHandler(Exception.class)
-    public ModelAndView ExceptionHandler(Exception ex){
+    public ModelAndView ExceptionHandler(Exception ex) {
 
         ErrorMessage errorMessage = new ErrorMessage(
                 HttpStatus.NOT_ACCEPTABLE.value(),

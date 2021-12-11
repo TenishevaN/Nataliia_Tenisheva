@@ -8,7 +8,7 @@
 ${errorText}
 <br>
 <div>
-      <a href="index.jsp"><fmt:message key="home"></fmt:message></a>
+      <a href="${pageContext.request.contextPath}/"><fmt:message key="home"></fmt:message></a>
 </div>
 
 </body>

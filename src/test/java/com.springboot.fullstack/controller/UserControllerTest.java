@@ -142,15 +142,16 @@ public class UserControllerTest {
     @Test
     void createUserTest() throws Exception {
 
-        given(userService.createUser(any(UserDto.class))).willReturn(userDto);
+        given(userService.createUser(any(UserDto.class), any(String.class))).willReturn(userDto);
 
         mockMvc.perform(post("/user")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .content(IntegrationTestUtil.convertObjectToFormUrlEncodedBytes(userDto))
                         .sessionAttr("user", userDto)
-                )
+                        .param("password", "1")
+                                      )
                 .andExpect(status().isCreated())
-                .andExpect(redirectedUrl("/user"))
+                .andExpect(view().name("mainPage"))
                 .andDo(result -> {
                     Map<String, Object> model = result.getModelAndView().getModel();
                     UserDto createdUser = (UserDto) model.get("user");
@@ -198,7 +199,7 @@ public class UserControllerTest {
         UserDto  userDtoLogin = (UserDto) userDto.clone();
         userDtoLogin.setLogin("Login#");
 
-        given(userService.createUser(any(UserDto.class))).willReturn(userDtoLogin);
+        given(userService.createUser(any(UserDto.class), any(String.class))).willReturn(userDtoLogin);
 
         mockMvc.perform(post("/user")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -215,7 +216,7 @@ public class UserControllerTest {
         UserDto  userDtoName = (UserDto) userDto.clone();
         userDtoName.setName("testName1#");
 
-        given(userService.createUser(any(UserDto.class))).willReturn(userDtoName);
+        given(userService.createUser(any(UserDto.class), any(String.class))).willReturn(userDtoName);
 
         mockMvc.perform(post("/user")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -232,7 +233,7 @@ public class UserControllerTest {
         UserDto  userDtoEmail = (UserDto) userDto.clone();
         userDtoEmail.setEmail("test@gmail");
 
-        given(userService.createUser(any(UserDto.class))).willReturn(userDtoEmail);
+        given(userService.createUser(any(UserDto.class), any(String.class))).willReturn(userDtoEmail);
 
         mockMvc.perform(post("/user")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -249,7 +250,7 @@ public class UserControllerTest {
         UserDto  userDtoNullValue = (UserDto) userDto.clone();
         userDtoNullValue.setName(null);
 
-        given(userService.createUser(any(UserDto.class))).willReturn(userDtoNullValue);
+        given(userService.createUser(any(UserDto.class), any(String.class))).willReturn(userDtoNullValue);
 
         mockMvc.perform(post("/user")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
